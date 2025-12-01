@@ -1,0 +1,3 @@
+spdx-license-list>=3.27
+requests>=2.32.4
+spdx-tools>=0.8.3
