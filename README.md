@@ -8,12 +8,12 @@ An SCA tool for creating an SPDX SBOM for a https://pypi.org/ package.
 usage: pypispdx [-h] [--json | --rdf | --xml | --yaml] [--debug] package
 ```
 
-where “package” is a Python package avalable on https://pypi.org/
+where “package” is a Python package available on https://pypi.org/
 
 ```
 options:
   -h, --help            Shows this help message and exits.
-  --debug               Enable debug output, including detailed messages and full tracebacks.
+  --debug               Enables debug output, including detailed messages and full tracebacks.
   --json                Output the result in SPDX JSON format.
   --rdf                 Output the result in SPDX RDF format.
   --xml                 Output the result in SPDX XML format.
