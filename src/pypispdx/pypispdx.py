@@ -1,6 +1,6 @@
 #!/bin/python3
 
-# © 2025 Nokia
+# © 2025-2026 Nokia
 # Author: Marc-Etienne Vargenau
 # Licensed under the Apache License 2.0
 # SPDX-License-Identifier: Apache-2.0
@@ -131,6 +131,41 @@ def get_package_info(package_name: str, debug_mode: bool) -> dict | None:
         if debug_mode:
             traceback.print_exc(file=sys.stderr)
         return None
+
+def get_clearlydefined_package_license(package_name: str, version: str) -> str:
+    """
+    Get the license information of a PyPI package using ClearlyDefined API.
+
+    Args:
+        package_name: The name of the PyPI package
+        version: The version of the package
+
+    Returns:
+        A string containing declared license or "NOASSERTION"
+    """
+
+    # ClearlyDefined URL format: /definitions/{type}/{provider}/{namespace}/{name}/{revision}
+    # For PyPI: type=pypi, provider=pypi, namespace=- (no namespace)
+    base_url = "https://api.clearlydefined.io/definitions"
+    url = f"{base_url}/pypi/pypi/-/{package_name}/{version}"
+
+    try:
+        response = requests.get(url, timeout=30)
+        response.raise_for_status()
+        data = response.json()
+
+        # Get declared license
+        if "licensed" in data:
+            licensed = data["licensed"]
+            if "declared" in licensed:
+                return licensed["declared"]
+
+        return "NOASSERTION"
+
+    except requests.exceptions.RequestException as e:
+        if debug_mode:
+            print(f"Failed to fetch data: {str(e)}")
+        return "NOASSERTION"
 
 def print_spdx_header(package_name: str, package_version: str, sbom_file_object) -> None:
     """
@@ -308,9 +343,13 @@ def print_package(package_name: str, package_version: str, sbom_file_object,
             if debug_mode:
                 print(f"DEBUG: License determined from classifiers: {spdx_license}", file=sys.stderr)
         else:
-            spdx_license = "NOASSERTION" # Default if nothing found
             if debug_mode:
-                print(f"DEBUG: No license could be determined for {package_name}, setting to NOASSERTION.", file=sys.stderr)
+                print(f"DEBUG: No license could be determined for {package_name} from https://pypi.org/.", file=sys.stderr)
+                print("DEBUG: Trying ClearlyDefined.", file=sys.stderr)
+            # Try ClearlyDefined
+            spdx_license = get_clearlydefined_package_license(dashed_package_name, package_version)
+            if debug_mode:
+                print(f"DEBUG: ClearlyDefined returned {spdx_license}.", file=sys.stderr)
 
     sbom_file_object.write(f"PackageLicenseConcluded: {spdx_license}\n")
     sbom_file_object.write(f"PackageLicenseDeclared: {spdx_license}\n")
