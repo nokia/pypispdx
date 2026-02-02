@@ -20,6 +20,7 @@ import argparse
 import traceback # Import traceback for detailed error logging
 import requests
 import spdx_license_list
+from license_expression import get_spdx_licensing
 from spdx_tools.spdx.parser.parse_anything import parse_file
 from spdx_tools.spdx.writer.write_anything import write_file
 
@@ -104,6 +105,21 @@ def dash_name(input_string: str) -> str:
     - str: The processed string.
     """
     return input_string.strip().replace("_", "-").replace(".", "-").lower()
+
+def is_valid_spdx_license_expression(spdx_license_expression: str) -> bool:
+    """
+    Checks if a string is a valid SPDX license expression.
+
+    Parameter:
+    - spdx_license_expression (str): The SPDX license expression.
+
+    Returns:
+    - bool: Boolean indicating if the expression is valid.
+    """
+    licensing = get_spdx_licensing()
+    result = licensing.validate(spdx_license_expression)
+    return len(result.errors) == 0
+
 
 def get_package_info(package_name: str, debug_mode: bool) -> dict | None:
     """
@@ -316,6 +332,10 @@ def print_package(package_name: str, package_version: str, sbom_file_object,
                 spdx_license = DEPRECATED_LICENSES_MAP.get(license_field, license_field)
                 if debug_mode:
                     print(f"DEBUG: 'license' field is valid SPDX: {spdx_license}", file=sys.stderr)
+            elif is_valid_spdx_license_expression(license_field):
+                spdx_license = license_field
+                if debug_mode:
+                    print(f"DEBUG: 'license' field is a valid SPDX expression: {spdx_license}", file=sys.stderr)
             else:
                 if debug_mode:
                     print(f"DEBUG: 'license' field '{license_field}' is not a known SPDX ID.", file=sys.stderr)
