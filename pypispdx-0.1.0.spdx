@@ -9,9 +9,9 @@ DocumentNamespace: https://pypi.org/spdx/pypispdx-0.1.0
 LicenseListVersion: 3.27
 Creator: Organization: Nokia
 Creator: Tool: pypispdx - 0.1.0
-Created: 2025-12-03T12:56:43Z
+Created: 2026-02-02T10:57:00Z
 CreatorComment: <text>CISA SBOM type: Analyzed
-This SBOM was created with Python version 3.14.0</text>
+This SBOM was created with Python version 3.14.2</text>
 
 ##### Package: pypispdx
 
@@ -32,16 +32,16 @@ ExternalRef: PACKAGE-MANAGER purl pkg:pypi/pypispdx@0.1.0
 
 PackageName: beartype
 SPDXID: SPDXRef-beartype
-PackageVersion: 0.22.8
+PackageVersion: 0.22.9
 PackageSupplier: Organization: https://pypi.org
-PackageDownloadLocation: https://files.pythonhosted.org/packages/8c/1d/794ae2acaa67c8b216d91d5919da2606c2bb14086849ffde7f5555f3a3a5/beartype-0.22.8.tar.gz
+PackageDownloadLocation: https://files.pythonhosted.org/packages/c7/94/1009e248bbfbab11397abca7193bea6626806be9a327d399810d523a07cb/beartype-0.22.9.tar.gz
 FilesAnalyzed: false
-PackageChecksum: SHA256: b19b21c9359722ee3f7cc433f063b3e13997b27ae8226551ea5062e621f61165
-PackageChecksum: MD5: 0b21bfa6eeb48485de09b2f27cfc84dc
+PackageChecksum: SHA256: 8f82b54aa723a2848a56008d18875f91c1db02c32ef6a62319a002e3e25a975f
+PackageChecksum: MD5: da867f7418a7e35ae5b8495b505000f0
 PackageLicenseConcluded: MIT
 PackageLicenseDeclared: MIT
 PackageCopyrightText: NOASSERTION
-ExternalRef: PACKAGE-MANAGER purl pkg:pypi/beartype@0.22.8
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/beartype@0.22.9
 
 ##### Package: boolean-py
 
@@ -62,16 +62,16 @@ ExternalRef: PACKAGE-MANAGER purl pkg:pypi/boolean-py@5.0
 
 PackageName: certifi
 SPDXID: SPDXRef-certifi
-PackageVersion: 2025.11.12
+PackageVersion: 2026.1.4
 PackageSupplier: Organization: https://pypi.org
-PackageDownloadLocation: https://files.pythonhosted.org/packages/a2/8c/58f469717fa48465e4a50c014a0400602d3c437d7c0c468e17ada824da3a/certifi-2025.11.12.tar.gz
+PackageDownloadLocation: https://files.pythonhosted.org/packages/e0/2d/a891ca51311197f6ad14a7ef42e2399f36cf2f9bd44752b3dc4eab60fdc5/certifi-2026.1.4.tar.gz
 FilesAnalyzed: false
-PackageChecksum: SHA256: d8ab5478f2ecd78af242878415affce761ca6bc54a22a27e026d7c25357c3316
-PackageChecksum: MD5: 430a5fa9f18895a9b69a018d2beae67b
+PackageChecksum: SHA256: ac726dd470482006e014ad384921ed6438c457018f4b3d204aea4281258b2120
+PackageChecksum: MD5: d8447ad858fa15af16f91e32f182aa85
 PackageLicenseConcluded: MPL-2.0
 PackageLicenseDeclared: MPL-2.0
 PackageCopyrightText: NOASSERTION
-ExternalRef: PACKAGE-MANAGER purl pkg:pypi/certifi@2025.11.12
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/certifi@2026.1.4
 
 ##### Package: charset-normalizer
 
@@ -152,16 +152,16 @@ ExternalRef: PACKAGE-MANAGER purl pkg:pypi/ply@3.11
 
 PackageName: pyparsing
 SPDXID: SPDXRef-pyparsing
-PackageVersion: 3.2.5
+PackageVersion: 3.3.2
 PackageSupplier: Organization: https://pypi.org
-PackageDownloadLocation: https://files.pythonhosted.org/packages/f2/a5/181488fc2b9d093e3972d2a472855aae8a03f000592dbfce716a512b3359/pyparsing-3.2.5.tar.gz
+PackageDownloadLocation: https://files.pythonhosted.org/packages/f3/91/9c6ee907786a473bf81c5f53cf703ba0957b23ab84c264080fb5a450416f/pyparsing-3.3.2.tar.gz
 FilesAnalyzed: false
-PackageChecksum: SHA256: 2df8d5b7b2802ef88e8d016a2eb9c7aeaa923529cd251ed0fe4608275d4105b6
-PackageChecksum: MD5: 49f6a72433130541fd92c56b110061d2
+PackageChecksum: SHA256: c777f4d763f140633dcb6d8a3eda953bf7a214dc4eff598413c070bcdc117cbc
+PackageChecksum: MD5: ca3bea68cd1a84584b68cd7bed679464
 PackageLicenseConcluded: MIT
 PackageLicenseDeclared: MIT
 PackageCopyrightText: NOASSERTION
-ExternalRef: PACKAGE-MANAGER purl pkg:pypi/pyparsing@3.2.5
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/pyparsing@3.3.2
 
 ##### Package: pyyaml
 
@@ -257,31 +257,31 @@ ExternalRef: PACKAGE-MANAGER purl pkg:pypi/spdx-tools@0.8.3
 
 PackageName: uritools
 SPDXID: SPDXRef-uritools
-PackageVersion: 5.0.0
+PackageVersion: 6.0.1
 PackageSupplier: Organization: https://pypi.org
-PackageDownloadLocation: https://files.pythonhosted.org/packages/36/b1/e482d43db3209663b82a59e37cf31f641254180190667c6b0bf18a297de8/uritools-5.0.0.tar.gz
+PackageDownloadLocation: https://files.pythonhosted.org/packages/dd/f7/6651d145bedd535a5bdd6dad108329ec1fec89d38ec611f8d98834eb5378/uritools-6.0.1.tar.gz
 FilesAnalyzed: false
-PackageChecksum: SHA256: 68180cad154062bd5b5d9ffcdd464f8de6934414b25462ae807b00b8df9345de
-PackageChecksum: MD5: 28cf165ca4b711b91bcec2d569cb1415
+PackageChecksum: SHA256: 2f9e9cb954e7877232b2c863f724a44a06eb98d9c7ebdd69914876e9487b94f8
+PackageChecksum: MD5: 790fc28c159751ca361df5b388d1a5c0
 PackageLicenseConcluded: MIT
 PackageLicenseDeclared: MIT
 PackageCopyrightText: NOASSERTION
-ExternalRef: PACKAGE-MANAGER purl pkg:pypi/uritools@5.0.0
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/uritools@6.0.1
 
 ##### Package: urllib3
 
 PackageName: urllib3
 SPDXID: SPDXRef-urllib3
-PackageVersion: 2.5.0
+PackageVersion: 2.6.3
 PackageSupplier: Organization: https://pypi.org
-PackageDownloadLocation: https://files.pythonhosted.org/packages/15/22/9ee70a2574a4f4599c47dd506532914ce044817c7752a79b6a51286319bc/urllib3-2.5.0.tar.gz
+PackageDownloadLocation: https://files.pythonhosted.org/packages/c7/24/5f1b3bdffd70275f6661c76461e25f024d5a38a46f04aaca912426a2b1d3/urllib3-2.6.3.tar.gz
 FilesAnalyzed: false
-PackageChecksum: SHA256: 3fc47733c7e419d4bc3f6b3dc2b4f890bb743906a30d56ba4a5bfa4bbff92760
-PackageChecksum: MD5: 2b8a86438e4d35fbc90572dbdb424759
+PackageChecksum: SHA256: 1b62b6884944a57dbe321509ab94fd4d3b307075e0c2eae991ac71ee15ad38ed
+PackageChecksum: MD5: 2c381874816fe551f50a2551abae62b3
 PackageLicenseConcluded: MIT
 PackageLicenseDeclared: MIT
 PackageCopyrightText: NOASSERTION
-ExternalRef: PACKAGE-MANAGER purl pkg:pypi/urllib3@2.5.0
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/urllib3@2.6.3
 
 ##### Package: xmltodict
 
