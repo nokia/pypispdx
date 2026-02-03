@@ -28,7 +28,7 @@ from spdx_tools.spdx.writer.write_anything import write_file
 SPDX_VERSION = "SPDX-2.3"
 DATA_LICENSE = "CC0-1.0"
 SPDX_DOCUMENT_REF = "SPDXRef-DOCUMENT"
-CREATOR_TOOL = "pypispdx - 0.1.0"
+CREATOR_TOOL = "pypispdx - 0.2.0"
 LICENSE_LIST_VERSION = "3.27"
 CISA_SBOM_TYPE = "Analyzed"
 PACKAGE_SUPPLIER = "Organization: https://pypi.org"
@@ -77,16 +77,6 @@ CLASSIFIER_LICENSE_MAP = {
     "License :: OSI Approved :: Vovida Software License 1.0": "VSL-1.0",
     "License :: OSI Approved :: W3C License": "W3C-20150513",
     "License :: OSI Approved :: X.Net License": "Xnet",
-}
-
-# Deprecated license identifiers mapping
-DEPRECATED_LICENSES_MAP = {
-    "GPL-2.0": "GPL-2.0-only",
-    "GPL-2.0+": "GPL-2.0-or-later",
-    "LGPL-2.0": "LGPL-2.0-only",
-    "LGPL-2.0+": "LGPL-2.0-or-later",
-    "LGPL-2.1": "LGPL-2.1-only",
-    "LGPL-2.1+": "LGPL-2.1-or-later",
 }
 
 class PyPISPDXError(Exception):
@@ -183,9 +173,8 @@ def get_clearlydefined_package_license(package_name: str, version: str) -> str:
         return "NOASSERTION"
 
     except requests.exceptions.RequestException as e:
-        if debug_mode:
-            print(f"Failed to fetch data: {str(e)}")
-        return "NOASSERTION"
+        print(f"Failed to fetch data: {str(e)}", file=sys.stderr)
+        raise
 
 def print_spdx_header(package_name: str, package_version: str, sbom_file_object) -> None:
     """
@@ -333,7 +322,7 @@ def print_package(package_name: str, package_version: str, sbom_file_object,
             if debug_mode:
                 print(f"DEBUG: No license_expression, checking 'license' field: {license_field}", file=sys.stderr)
             if license_field in spdx_license_list.LICENSES:
-                spdx_license = DEPRECATED_LICENSES_MAP.get(license_field, license_field)
+                spdx_license = license_field
                 if debug_mode:
                     print(f"DEBUG: 'license' field is valid SPDX: {spdx_license}", file=sys.stderr)
             elif is_valid_spdx_license_expression(license_field):
@@ -374,6 +363,11 @@ def print_package(package_name: str, package_version: str, sbom_file_object,
             spdx_license = get_clearlydefined_package_license(dashed_package_name, package_version)
             if debug_mode:
                 print(f"DEBUG: ClearlyDefined returned {spdx_license}.", file=sys.stderr)
+
+    # Normalize license expression
+    licensing = get_spdx_licensing()
+    parsed = licensing.parse(spdx_license)
+    spdx_license = str(parsed)
 
     sbom_file_object.write(f"PackageLicenseConcluded: {spdx_license}\n")
     sbom_file_object.write(f"PackageLicenseDeclared: {spdx_license}\n")
@@ -616,6 +610,7 @@ def main():
         # Clean up partially created SBOM file if an error occurred
         if os.path.exists(sbom_filename):
             os.remove(sbom_filename)
+        print(f"SBOM for {main_package_name} could not be created", file=sys.stderr)
         sys.exit(1)
     except Exception as e:
         print(f"An unexpected error occurred: {e}", file=sys.stderr)
@@ -623,6 +618,7 @@ def main():
             traceback.print_exc(file=sys.stderr) # Print full traceback in debug mode
         if os.path.exists(sbom_filename):
             os.remove(sbom_filename)
+        print(f"SBOM for {main_package_name} could not be created", file=sys.stderr)
         sys.exit(1)
 
 if __name__ == "__main__":
