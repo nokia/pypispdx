@@ -19,6 +19,7 @@ import subprocess
 import argparse
 import traceback # Import traceback for detailed error logging
 import requests
+import urllib.request
 import spdx_license_list
 from license_expression import get_spdx_licensing
 from spdx_tools.spdx.parser.parse_anything import parse_file
@@ -35,6 +36,7 @@ PACKAGE_SUPPLIER = "Organization: https://pypi.org"
 FILES_ANALYZED = "false"
 PACKAGE_COPYRIGHT_TEXT = "NOASSERTION"
 PURL_EXTERNAL_REF_TYPE = "PACKAGE-MANAGER purl pkg:pypi/"
+CACHE = "https://raw.githubusercontent.com/nokia/pypispdx/refs/heads/main/cache"
 
 # Mapping for common OSI-approved licenses from classifiers
 CLASSIFIER_LICENSE_MAP = {
@@ -82,6 +84,25 @@ CLASSIFIER_LICENSE_MAP = {
 class PyPISPDXError(Exception):
     """Custom exception for PyPI SPDX generation errors."""
     pass
+
+def cached_license(package: str) -> str:
+    """
+    Return the cached license of the package or "NOASSERTION".
+
+    Parameter:
+    - package (str): The package name.
+
+    Returns:
+    - str: The cached license or "NOASSERTION" if not cached.
+    """
+
+    with urllib.request.urlopen(CACHE) as cache:
+        for line in cache:
+            line = line.decode('utf-8')
+            license = line.split(';')
+            if len(license) >= 2 and license[0].strip() == package:
+                return license[1].strip()
+    return "NOASSERTION"
 
 def dash_name(input_string: str) -> str:
     """
@@ -363,6 +384,12 @@ def print_package(package_name: str, package_version: str, sbom_file_object,
             spdx_license = get_clearlydefined_package_license(dashed_package_name, package_version)
             if debug_mode:
                 print(f"DEBUG: ClearlyDefined returned {spdx_license}.", file=sys.stderr)
+
+    if spdx_license == "NOASSERTION":
+        # We have not yet found a license, let us try the cache
+        if debug_mode:
+            print(f"DEBUG: trying to use the cache for {dashed_package_name}.", file=sys.stderr)
+        spdx_license = cached_license(package_name)
 
     # Normalize license expression
     licensing = get_spdx_licensing()
