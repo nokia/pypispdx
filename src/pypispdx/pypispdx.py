@@ -19,7 +19,6 @@ import subprocess
 import argparse
 import traceback # Import traceback for detailed error logging
 import requests
-import urllib.request
 import spdx_license_list
 from license_expression import get_spdx_licensing
 from spdx_tools.spdx.parser.parse_anything import parse_file
@@ -83,7 +82,6 @@ CLASSIFIER_LICENSE_MAP = {
 
 class PyPISPDXError(Exception):
     """Custom exception for PyPI SPDX generation errors."""
-    pass
 
 def cached_license(package: str) -> str:
     """
@@ -99,10 +97,36 @@ def cached_license(package: str) -> str:
     with urllib.request.urlopen(CACHE) as cache:
         for line in cache:
             line = line.decode('utf-8')
-            license = line.split(';')
-            if len(license) >= 2 and license[0].strip() == package:
-                return license[1].strip()
+            lic = line.split(';')
+            if len(lic) >= 2 and lic[0].strip() == package:
+                return lic[1].strip()
     return "NOASSERTION"
+
+def get_aboutcode_license_text(license_key: str) -> str:
+    """
+    Fetches the license text from AboutCode LicenseDB for a given license key.
+
+    Args:
+        license_key: The license identifier (e.g., 'LicenseRef-scancode-protobuf')
+
+    Returns:
+        The full license text as a string.
+
+    Raises:
+        requests.HTTPError: If the license is not found or request fails.
+    """
+
+    # Remove 'LicenseRef-scancode-'
+    license_key = license_key.replace('LicenseRef-scancode-', '')
+
+    base_url = "https://scancode-licensedb.aboutcode.org"
+
+    # Fetch the license text directly
+    text_url = f"{base_url}/{license_key}.LICENSE"
+    response = requests.get(text_url)
+    response.raise_for_status()
+
+    return response.text
 
 def dash_name(input_string: str) -> str:
     """
@@ -300,7 +324,7 @@ def _get_spdx_license_from_classifiers(classifiers: list, unknown_licenses_list:
     return None
 
 def print_package(package_name: str, package_version: str, sbom_file_object,
-                  custom_licenses_list: list, unknown_licenses_list: list, debug_mode: bool) -> None:
+                  aboutcode_licenses_list: list, custom_licenses_list: list, unknown_licenses_list: list, debug_mode: bool) -> None:
     """
     Prints the SPDX package information to the SBOM file.
 
@@ -308,6 +332,7 @@ def print_package(package_name: str, package_version: str, sbom_file_object,
     - package_name (str): The name of the package.
     - package_version (str): The version of the package.
     - sbom_file_object (io.TextIOWrapper): The SBOM file object where to write.
+    - aboutcode_licenses_list (list): A list to store AboutCode license details.
     - custom_licenses_list (list): A list to store custom license details.
     - unknown_licenses_list (list): A list to store unknown license details.
     - debug_mode (bool): If True, print debug information.
@@ -389,7 +414,6 @@ def print_package(package_name: str, package_version: str, sbom_file_object,
                     print(f"DEBUG: 'license' field '{license_field}' is not a known SPDX ID.", file=sys.stderr)
                 # If 'license' field is not a known SPDX ID, treat as NOASSERTION for now
                 # and check classifiers next.
-                pass
 
     # Check for custom licenses (LicenseRef- with no spaces)
     if spdx_license and spdx_license.startswith("LicenseRef-") and " " not in spdx_license:
@@ -430,6 +454,15 @@ def print_package(package_name: str, package_version: str, sbom_file_object,
     parsed = licensing.parse(spdx_license)
     spdx_license = str(parsed)
 
+    # We need to check if there are "LicenseRef-scancode-*" licenses.
+    # If so we need to provide the text of the license.
+    parsed = licensing.license_symbols(parsed)
+    for lic in parsed:
+        name = str(lic)
+        if name.startswith("LicenseRef-scancode-"):
+            about = {"id": name, "text": get_aboutcode_license_text(name)}
+            aboutcode_licenses_list.append(about)
+
     sbom_file_object.write(f"PackageLicenseConcluded: {spdx_license}\n")
     sbom_file_object.write(f"PackageLicenseDeclared: {spdx_license}\n")
 
@@ -438,8 +471,8 @@ def print_package(package_name: str, package_version: str, sbom_file_object,
         sbom_file_object.write("PackageCopyrightText: NOASSERTION\n")
     else:
         sbom_file_object.write("PackageCopyrightText: <text>")
-        for copyright in package_copyright:
-            sbom_file_object.write(f"{copyright}\n")
+        for c in package_copyright:
+            sbom_file_object.write(f"{c}\n")
         sbom_file_object.write("</text>\n")
 
     sbom_file_object.write(f"ExternalRef: {PURL_EXTERNAL_REF_TYPE}{dashed_package_name}@{package_version}\n\n")
@@ -576,12 +609,13 @@ def main():
         main_package_dashed = dash_name(main_package_name)
 
         sbom_filename = f"{main_package_dashed}-{main_version}.spdx"
+        aboutcode_licenses = []
         custom_licenses = []
         unknown_licenses = []
 
         with open(sbom_filename, "w", encoding="utf-8") as sbom:
             print_spdx_header(main_package_name, main_version, sbom)
-            print_package(main_package_name, main_version, sbom, custom_licenses, unknown_licenses, debug_mode)
+            print_package(main_package_name, main_version, sbom, aboutcode_licenses, custom_licenses, unknown_licenses, debug_mode)
 
             # Use subprocess.run for better control over external commands
             temp_json_report = f"{main_package_dashed}_pip_report.json"
@@ -629,7 +663,7 @@ def main():
             for dep in dependencies:
                 dep_name_dashed = dash_name(dep["name"])
                 if dep_name_dashed != main_package_dashed: # Avoid re-printing the main package
-                    print_package(dep["name"], dep["version"], sbom, custom_licenses, unknown_licenses, debug_mode)
+                    print_package(dep["name"], dep["version"], sbom, aboutcode_licenses, custom_licenses, unknown_licenses, debug_mode)
 
             sbom.write("##### Relationships\n\n")
             sbom.write(f"Relationship: {SPDX_DOCUMENT_REF} DESCRIBES SPDXRef-{main_package_dashed}\n")
@@ -639,9 +673,17 @@ def main():
                 if dep_name_dashed != main_package_dashed:
                     sbom.write(f"Relationship: SPDXRef-{main_package_dashed} CONTAINS SPDXRef-{dep_name_dashed}\n")
 
-            # Print custom and unknown licenses if any were found
-            if custom_licenses or unknown_licenses:
+            # Print aboutcode, custom and unknown licenses if any were found
+            if aboutcode_licenses or custom_licenses or unknown_licenses:
                 sbom.write("\n##### Custom licenses\n\n")
+
+            for about_license in aboutcode_licenses:
+                if debug_mode:
+                    print(f"DEBUG: Adding AboutCode license: {about_license['id']}", file=sys.stderr)
+                sbom.write(f"LicenseID: {about_license['id']}\n")
+                license_name = about_license['id'].replace('LicenseRef-', '')
+                sbom.write(f"LicenseName: {license_name}\n")
+                sbom.write(f"ExtractedText: <text>{about_license['text']}</text>\n")
 
             for cust_license in custom_licenses:
                 _process_custom_license_file(cust_license, sbom, debug_mode)
