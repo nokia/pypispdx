@@ -34,8 +34,8 @@ LICENSE_LIST_VERSION = "3.27"
 CISA_SBOM_TYPE = "Analyzed"
 PACKAGE_SUPPLIER = "Organization: https://pypi.org"
 FILES_ANALYZED = "false"
-PACKAGE_COPYRIGHT_TEXT = "NOASSERTION"
 PURL_EXTERNAL_REF_TYPE = "PACKAGE-MANAGER purl pkg:pypi/"
+CLEARLYDEFINED = "https://api.clearlydefined.io/definitions"
 CACHE = "https://raw.githubusercontent.com/nokia/pypispdx/refs/heads/main/cache"
 
 # Mapping for common OSI-approved licenses from classifiers
@@ -135,6 +135,41 @@ def is_valid_spdx_license_expression(spdx_license_expression: str) -> bool:
     result = licensing.validate(spdx_license_expression)
     return len(result.errors) == 0
 
+def get_pypi_package_copyright(package_name: str, version: str) -> list:
+    """
+    Get copyright information for a PyPI package from ClearlyDefined API.
+
+    Args:
+        package_name: The name of the PyPI package
+        version: The version of the package
+
+    Returns:
+        A list containing copyright information
+    """
+
+    # ClearlyDefined URL format: /definitions/{type}/{provider}/{namespace}/{name}/{revision}
+    # For PyPI: type=pypi, provider=pypi, namespace=- (no namespace)
+    url = f"{CLEARLYDEFINED}/pypi/pypi/-/{package_name}/{version}"
+
+    try:
+        response = requests.get(url, timeout=30)
+        response.raise_for_status()
+        data = response.json()
+
+        # Extract copyright information from the response
+
+        # Get declared license
+        licensed = data.get("licensed", {})
+
+        # Get attribution parties (copyright holders)
+        facets = licensed.get("facets", {})
+        core = facets.get("core", {})
+        attribution = core.get("attribution", {})
+
+        return attribution.get("parties", [])
+
+    except requests.exceptions.RequestException:
+        return []
 
 def get_package_info(package_name: str, debug_mode: bool) -> dict | None:
     """
@@ -177,8 +212,7 @@ def get_clearlydefined_package_license(package_name: str, version: str) -> str:
 
     # ClearlyDefined URL format: /definitions/{type}/{provider}/{namespace}/{name}/{revision}
     # For PyPI: type=pypi, provider=pypi, namespace=- (no namespace)
-    base_url = "https://api.clearlydefined.io/definitions"
-    url = f"{base_url}/pypi/pypi/-/{package_name}/{version}"
+    url = f"{CLEARLYDEFINED}/pypi/pypi/-/{package_name}/{version}"
 
     try:
         response = requests.get(url, timeout=30)
@@ -398,7 +432,16 @@ def print_package(package_name: str, package_version: str, sbom_file_object,
 
     sbom_file_object.write(f"PackageLicenseConcluded: {spdx_license}\n")
     sbom_file_object.write(f"PackageLicenseDeclared: {spdx_license}\n")
-    sbom_file_object.write(f"PackageCopyrightText: {PACKAGE_COPYRIGHT_TEXT}\n")
+
+    package_copyright = get_pypi_package_copyright(dashed_package_name, package_version)
+    if len(package_copyright) == 0:
+        sbom_file_object.write("PackageCopyrightText: NOASSERTION\n")
+    else:
+        sbom_file_object.write("PackageCopyrightText: <text>")
+        for copyright in package_copyright:
+            sbom_file_object.write(f"{copyright}\n")
+        sbom_file_object.write("</text>\n")
+
     sbom_file_object.write(f"ExternalRef: {PURL_EXTERNAL_REF_TYPE}{dashed_package_name}@{package_version}\n\n")
 
 def _process_custom_license_file(custom_license_entry: dict, sbom_file_object, debug_mode: bool) -> None:
