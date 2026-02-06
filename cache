@@ -7,3 +7,5 @@ multidict; Apache-2.0; https://github.com/aio-libs/multidict/pull/1292
 protobuf; BSD-3-Clause
 py-tlsh; Apache-2.0 OR BSD-3-Clause
 rich-click; MIT
+semantic-version; BSD-2-Clause
+uuid-utils; BSD-3-Clause; https://github.com/aminalaee/uuid-utils/pull/129
