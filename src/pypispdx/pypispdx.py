@@ -78,6 +78,7 @@ CLASSIFIER_LICENSE_MAP = {
     "License :: OSI Approved :: Vovida Software License 1.0": "VSL-1.0",
     "License :: OSI Approved :: W3C License": "W3C-20150513",
     "License :: OSI Approved :: X.Net License": "Xnet",
+    "License :: Public Domain": "LicenseRef-scancode-public-domain",
 }
 
 class PyPISPDXError(Exception):
