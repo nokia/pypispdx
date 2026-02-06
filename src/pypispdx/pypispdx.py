@@ -165,17 +165,21 @@ def is_valid_spdx_license_expression(spdx_license_expression: str) -> bool:
     result = licensing.validate(spdx_license_expression)
     return len(result.errors) == 0
 
-def get_pypi_package_copyright(package_name: str, version: str) -> list:
+def get_pypi_package_copyright(package_name: str, version: str, debug_mode: bool) -> list:
     """
     Get copyright information for a PyPI package from ClearlyDefined API.
 
     Args:
     - package_name (str): The name of the PyPI package
     - version (str): The version of the package
+    - debug_mode (bool): If True, print debug information.
 
     Returns:
     - list: A list containing copyright information
     """
+
+    if debug_mode:
+        print(f"DEBUG: getting Copyright for {package_name} version {version}", file=sys.stderr)
 
     # ClearlyDefined URL format: /definitions/{type}/{provider}/{namespace}/{name}/{revision}
     # For PyPI: type=pypi, provider=pypi, namespace=- (no namespace)
@@ -199,6 +203,8 @@ def get_pypi_package_copyright(package_name: str, version: str) -> list:
         return attribution.get("parties", [])
 
     except requests.exceptions.RequestException:
+        if debug_mode:
+            print(f"DEBUG: could not get Copyright for {package_name} version {version}", file=sys.stderr)
         return []
 
 def get_package_info(package_name: str, debug_mode: bool) -> dict | None:
@@ -472,7 +478,7 @@ def print_package(package_name: str, package_version: str, sbom_file_object,
     sbom_file_object.write(f"PackageLicenseConcluded: {spdx_license}\n")
     sbom_file_object.write(f"PackageLicenseDeclared: {spdx_license}\n")
 
-    package_copyright = get_pypi_package_copyright(dashed_package_name, package_version)
+    package_copyright = get_pypi_package_copyright(dashed_package_name, package_version, debug_mode)
     if len(package_copyright) == 0:
         sbom_file_object.write("PackageCopyrightText: NOASSERTION\n")
     else:
