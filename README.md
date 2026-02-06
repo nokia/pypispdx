@@ -50,10 +50,12 @@ If not available, it will be NOASSERTION.
 
 If available, the ```PackageChecksum``` will be provided in both SHA256 and MD5.
 
-The ```PackageLicenseConcluded``` and ```PackageLicenseDeclared``` will be given if available on PyPI.
+The ```PackageLicenseConcluded``` and ```PackageLicenseDeclared``` will be given if available on
+PyPI or ClearlyDefined.
 If not, it will be NOASSERTION. See more details below.
 
-The ```PackageCopyrightText``` will always be NOASSERTION.
+The ```PackageCopyrightText``` will taken from ```https://clearlydefined.io``` if it is
+present there. If not, it will be NOASSERTION.
 
 The [PURL](https://github.com/package-url/purl-spec/) (Package URL) will be provided
 in the ```ExternalRef``` field.
@@ -72,6 +74,20 @@ If the classifier is ambiguous, for example:
 License :: OSI Approved :: GNU General Public License (GPL)
 ```
 a ```LicenseRef-``` is created with that text.
+
+If the license cannot be found on https://pypi.org, it will be searched on ```https://clearlydefined.io```.
+
+Finally, the file ```cache``` will be used.
+
+The content of the file is like:
+```
+# package; license; comment (e.g. pull request)
+jsonresolver; BSD-2-Clause AND BSD-3-Clause AND JSON
+metrics-miscellany; CC-BY-NC-SA-4.0
+multidict; Apache-2.0; https://github.com/aio-libs/multidict/pull/1292
+py-tlsh; Apache-2.0 OR BSD-3-Clause
+rich-click; MIT
+```
 
 When the license is specified with a ```LicenseRef-```, the text of the license
 is retreived from the license file and put in the SBOM.
