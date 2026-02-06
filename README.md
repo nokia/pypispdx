@@ -65,19 +65,9 @@ in the ```ExternalRef``` field.
 First, the licenses will be searched in “license_expression” as specified in
 [PEP 639](https://peps.python.org/pep-0639/).
 
-If not available, the licenses will be searched in “license”
+If not available, the licenses will be searched in “license”.
 
-If no “license_expression” and no “license” they will be searched in “classifiers”
-
-If the classifier is ambiguous, for example:
-```
-License :: OSI Approved :: GNU General Public License (GPL)
-```
-a ```LicenseRef-``` is created with that text.
-
-If the license cannot be found on https://pypi.org, it will be searched on ```https://clearlydefined.io```.
-
-Finally, the file ```cache``` will be used.
+If no “license_expression” and no “license”, the file ```cache``` will be used.
 
 The content of the file is like:
 ```
@@ -88,6 +78,17 @@ multidict; Apache-2.0; https://github.com/aio-libs/multidict/pull/1292
 py-tlsh; Apache-2.0 OR BSD-3-Clause
 rich-click; MIT
 ```
+If still no license found, we will search in “classifiers”.
+
+The value used in classifiers will be mapped to the corresponding SPDX identifier.
+
+If the classifier is ambiguous, for example:
+```
+License :: OSI Approved :: GNU General Public License (GPL)
+```
+a ```LicenseRef-``` is created with that text.
+
+If the license cannot be found on https://pypi.org and in cache, it will be searched on ```https://clearlydefined.io```.
 
 When the license is specified with a ```LicenseRef-```, the text of the license
 is retreived from the license file and put in the SBOM.

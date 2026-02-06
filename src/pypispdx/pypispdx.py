@@ -436,6 +436,12 @@ def print_package(package_name: str, package_version: str, sbom_file_object,
             if debug_mode:
                 print(f"DEBUG: Identified custom license: {spdx_license} from file {license_files[0]}", file=sys.stderr)
 
+    # We have not yet found a license, let us try the cache
+    if not spdx_license or spdx_license == "NOASSERTION":
+        if debug_mode:
+            print(f"DEBUG: trying to use the cache for {dashed_package_name}.", file=sys.stderr)
+        spdx_license = cached_license(package_name)
+
     # If still no license, try classifiers
     if not spdx_license or spdx_license == "NOASSERTION": # Check for explicit NOASSERTION from previous step
         if debug_mode:
@@ -454,12 +460,6 @@ def print_package(package_name: str, package_version: str, sbom_file_object,
             spdx_license = get_clearlydefined_package_license(dashed_package_name, package_version)
             if debug_mode:
                 print(f"DEBUG: ClearlyDefined returned {spdx_license}.", file=sys.stderr)
-
-    if spdx_license == "NOASSERTION":
-        # We have not yet found a license, let us try the cache
-        if debug_mode:
-            print(f"DEBUG: trying to use the cache for {dashed_package_name}.", file=sys.stderr)
-        spdx_license = cached_license(package_name)
 
     # Normalize license expression
     licensing = get_spdx_licensing()
