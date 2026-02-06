@@ -88,7 +88,7 @@ def cached_license(package: str) -> str:
     """
     Return the cached license of the package or "NOASSERTION".
 
-    Parameter:
+    Arg:
     - package (str): The package name.
 
     Returns:
@@ -108,13 +108,13 @@ def get_aboutcode_license_text(license_key: str) -> str:
     Fetches the license text from AboutCode LicenseDB for a given license key.
 
     Args:
-        license_key: The license identifier (e.g., 'LicenseRef-scancode-protobuf')
+    - license_key (str): The license identifier (e.g., 'LicenseRef-scancode-protobuf')
 
     Returns:
-        The full license text as a string.
+    - str: The full license text as a string.
 
     Raises:
-        requests.HTTPError: If the license is not found or request fails.
+    - requests.HTTPError: If the license is not found or request fails.
     """
 
     # Remove 'LicenseRef-scancode-'
@@ -139,7 +139,7 @@ def dash_name(input_string: str) -> str:
     Replaces underscore and dot characters in a string with dashes,
     and converts uppercase letters to lowercase.
 
-    Parameter:
+    Arg:
     - input_string (str): The string to process.
 
     Returns:
@@ -151,7 +151,7 @@ def is_valid_spdx_license_expression(spdx_license_expression: str) -> bool:
     """
     Checks if a string is a valid SPDX license expression.
 
-    Parameter:
+    Arg:
     - spdx_license_expression (str): The SPDX license expression.
 
     Returns:
@@ -170,11 +170,11 @@ def get_pypi_package_copyright(package_name: str, version: str) -> list:
     Get copyright information for a PyPI package from ClearlyDefined API.
 
     Args:
-        package_name: The name of the PyPI package
-        version: The version of the package
+    - package_name (str): The name of the PyPI package
+    - version (str): The version of the package
 
     Returns:
-        A list containing copyright information
+    - list: A list containing copyright information
     """
 
     # ClearlyDefined URL format: /definitions/{type}/{provider}/{namespace}/{name}/{revision}
@@ -205,7 +205,7 @@ def get_package_info(package_name: str, debug_mode: bool) -> dict | None:
     """
     Fetches information about a package from PyPI.
 
-    Parameter:
+    Args:
     - package_name (str): The name of the package to fetch information about.
     - debug_mode (bool): If True, print debug information.
 
@@ -233,11 +233,11 @@ def get_clearlydefined_package_license(package_name: str, version: str) -> str:
     Get the license information of a PyPI package using ClearlyDefined API.
 
     Args:
-        package_name: The name of the PyPI package
-        version: The version of the package
+    - package_name (str): The name of the PyPI package
+    - version (str): The version of the package
 
     Returns:
-        A string containing declared license or "NOASSERTION"
+    - str: A string containing declared license or "NOASSERTION"
     """
 
     # ClearlyDefined URL format: /definitions/{type}/{provider}/{namespace}/{name}/{revision}
@@ -265,7 +265,7 @@ def print_spdx_header(package_name: str, package_version: str, sbom_file_object)
     """
     Prints the SPDX header to the SBOM file.
 
-    Parameters:
+    Args:
     - package_name (str): The name of the main package.
     - package_version (str): The version of the main package.
     - sbom_file_object (io.TextIOWrapper): The SBOM file object where to write.
@@ -298,7 +298,7 @@ def _get_spdx_license_from_classifiers(classifiers: list, unknown_licenses_list:
     """
     Determines the SPDX license identifier(s) from PyPI classifiers.
 
-    Parameters:
+    Args:
     - classifiers (list): List of classifier strings from PyPI.
     - unknown_licenses_list (list): A list to append details of unknown licenses.
     - debug_mode (bool): If True, print debug information.
@@ -334,7 +334,7 @@ def print_package(package_name: str, package_version: str, sbom_file_object,
     """
     Prints the SPDX package information to the SBOM file.
 
-    Parameters:
+    Args:
     - package_name (str): The name of the package.
     - package_version (str): The version of the package.
     - sbom_file_object (io.TextIOWrapper): The SBOM file object where to write.
@@ -487,7 +487,7 @@ def _process_custom_license_file(custom_license_entry: dict, sbom_file_object, d
     """
     Downloads, extracts, and writes the text of a custom license to the SBOM.
 
-    Parameters:
+    Args:
     - custom_license_entry (dict): Dictionary containing 'id', 'file', and 'download_location'.
     - sbom_file_object (io.TextIOWrapper): The SBOM file object where to write.
     - debug_mode (bool): If True, print debug information.
