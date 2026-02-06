@@ -126,6 +126,11 @@ def get_aboutcode_license_text(license_key: str) -> str:
     response = requests.get(text_url)
     response.raise_for_status()
 
+    if license_key == "public-domain":
+        return "This software is public domain"
+    elif response.text == "":
+        return "This license has no text in ScanCode LicenseDB"
+
     return response.text
 
 def dash_name(input_string: str) -> str:
