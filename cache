@@ -4,7 +4,6 @@ jsonresolver; BSD-2-Clause AND BSD-3-Clause AND JSON
 metrics-miscellany; CC-BY-NC-SA-4.0
 mistralai; Apache-2.0
 multidict; Apache-2.0; https://github.com/aio-libs/multidict/pull/1292
-protobuf; BSD-3-Clause
 py-tlsh; Apache-2.0 OR BSD-3-Clause
 rich-click; MIT
 semantic-version; BSD-2-Clause
