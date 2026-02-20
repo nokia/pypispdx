@@ -411,6 +411,10 @@ def print_package(package_name: str, package_version: str, sbom_file_object,
     if not spdx_license:
         license_field = info.get("license")
         if license_field:
+            # Handle license with quotes:
+            # setup.cfg:license = "MIT"
+            license_field = license_field.strip('"')
+            license_field = license_field.strip("'")
             if debug_mode:
                 print(f"DEBUG: No license_expression, checking 'license' field: {license_field}", file=sys.stderr)
             if license_field in spdx_license_list.LICENSES:
