@@ -14,6 +14,7 @@ where “package” is a Python package available on https://pypi.org/
 options:
   -h, --help            Shows this help message and exits.
   --debug               Enables debug output, including detailed messages and full tracebacks.
+  -v, --version         Show the program version and exit.
   --json                Output the result in SPDX JSON format.
   --rdf                 Output the result in SPDX RDF format.
   --xml                 Output the result in SPDX XML format.
