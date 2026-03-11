@@ -28,7 +28,8 @@ from spdx_tools.spdx.writer.write_anything import write_file
 SPDX_VERSION = "SPDX-2.3"
 DATA_LICENSE = "CC0-1.0"
 SPDX_DOCUMENT_REF = "SPDXRef-DOCUMENT"
-CREATOR_TOOL = "pypispdx - 0.2.0"
+VERSION = "0.2.0"
+CREATOR_TOOL = f"pypispdx - {VERSION}"
 LICENSE_LIST_VERSION = "3.27"
 CISA_SBOM_TYPE = "Analyzed"
 PACKAGE_SUPPLIER = "Organization: https://pypi.org"
@@ -584,6 +585,12 @@ def main():
         action="store_true",
         help="Enable debug output, including detailed messages and full tracebacks."
     )
+    parser.add_argument(
+        "--version", "-v",
+        action="version",
+        version=f"%(prog)s {VERSION}",
+        help="Show the program version and exit."
+)
     spdxformat = parser.add_mutually_exclusive_group()
     spdxformat.add_argument(
         "--json",
