@@ -46,16 +46,16 @@ The DocumentNamespace will be ```https://pypi.org/spdx/```package-version
 For each package, the ```PackageSupplier``` will be “Organization: https://pypi.org”.
 
 The ```PackageDownloadLocation``` will be a “.tar.gz” file if available.
-If not available, it will be NOASSERTION.
+If not available, it will be ```NOASSERTION```.
 
 If available, the ```PackageChecksum``` will be provided in both SHA256 and MD5.
 
 The ```PackageLicenseConcluded``` and ```PackageLicenseDeclared``` will be given if available on
 PyPI or ClearlyDefined.
-If not, it will be NOASSERTION. See more details below.
+If not, it will be ```NOASSERTION```. See more details below.
 
-The ```PackageCopyrightText``` will taken from ```https://clearlydefined.io``` if it is
-present there. If not, it will be NOASSERTION.
+The ```PackageCopyrightText``` will taken from <https://clearlydefined.io> if it is
+present there. If not, it will be ```NOASSERTION```.
 
 The [PURL](https://github.com/package-url/purl-spec/) (Package URL) will be provided
 in the ```ExternalRef``` field.
@@ -88,7 +88,7 @@ License :: OSI Approved :: GNU General Public License (GPL)
 ```
 a ```LicenseRef-``` is created with that text.
 
-If the license cannot be found on https://pypi.org and in cache, it will be searched on ```https://clearlydefined.io```.
+If the license cannot be found on https://pypi.org and in ```cache```, it will be searched on <https://clearlydefined.io>.
 
 When the license is specified with a ```LicenseRef-```, the text of the license
 is retreived from the license file and put in the SBOM.
