@@ -1,4 +1,4 @@
 spdx-license-list>=3.27
 requests>=2.32.4
-spdx-tools>=0.8.3
+spdx-tools>=0.8.5
 license-expression>=30.4.4

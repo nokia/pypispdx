@@ -15,9 +15,11 @@ import re
 import json
 import urllib.request
 import tarfile
+import tempfile
 import subprocess
 import argparse
 import traceback # Import traceback for detailed error logging
+import unicodedata
 import requests
 import spdx_license_list
 from license_expression import get_spdx_licensing
@@ -28,9 +30,9 @@ from spdx_tools.spdx.writer.write_anything import write_file
 SPDX_VERSION = "SPDX-2.3"
 DATA_LICENSE = "CC0-1.0"
 SPDX_DOCUMENT_REF = "SPDXRef-DOCUMENT"
-VERSION = "0.2.0"
+VERSION = "0.2.1"
 CREATOR_TOOL = f"pypispdx - {VERSION}"
-LICENSE_LIST_VERSION = "3.27"
+LICENSE_LIST_VERSION = "3.28"
 CISA_SBOM_TYPE = "Analyzed"
 PACKAGE_SUPPLIER = "Organization: https://pypi.org"
 FILES_ANALYZED = "false"
@@ -84,6 +86,23 @@ CLASSIFIER_LICENSE_MAP = {
 
 class PyPISPDXError(Exception):
     """Custom exception for PyPI SPDX generation errors."""
+
+def remove_control_characters(s: str) -> str:
+    """
+    Remove all control characters from a string,
+    except line feed (LF) and carriage return (CR).
+
+    Arg:
+    - s (str): The input string
+
+    Returns:
+    - str: The input string without control characters.
+    """
+
+    return "".join(
+        ch for ch in s
+        if unicodedata.category(ch) != "Cc" or ch in ("\n", "\r")
+    )
 
 def cached_license(package: str) -> str:
     """
@@ -204,9 +223,8 @@ def get_pypi_package_copyright(package_name: str, version: str, debug_mode: bool
         return attribution.get("parties", [])
 
     except requests.exceptions.RequestException:
-        if debug_mode:
-            print(f"DEBUG: could not get Copyright for {package_name} version {version}", file=sys.stderr)
-        return []
+        print(f"Could not get Copyright for {package_name} version {version}", file=sys.stderr)
+        raise
 
 def get_package_info(package_name: str, debug_mode: bool) -> dict | None:
     """
@@ -478,7 +496,8 @@ def print_package(package_name: str, package_version: str, sbom_file_object,
         name = str(lic)
         if name.startswith("LicenseRef-scancode-"):
             about = {"id": name, "text": get_aboutcode_license_text(name)}
-            aboutcode_licenses_list.append(about)
+            if about not in aboutcode_licenses_list:
+                aboutcode_licenses_list.append(about)
 
     sbom_file_object.write(f"PackageLicenseConcluded: {spdx_license}\n")
     sbom_file_object.write(f"PackageLicenseDeclared: {spdx_license}\n")
@@ -489,6 +508,7 @@ def print_package(package_name: str, package_version: str, sbom_file_object,
     else:
         sbom_file_object.write("PackageCopyrightText: <text>")
         for c in package_copyright:
+            c = remove_control_characters(c)
             sbom_file_object.write(f"{c}\n")
         sbom_file_object.write("</text>\n")
 
@@ -549,6 +569,7 @@ def _process_custom_license_file(custom_license_entry: dict, sbom_file_object, d
                 lic_text = lic_f.read().decode("utf-8", errors='replace') # Use 'replace' for encoding errors
 
             sbom_file_object.write("ExtractedText: <text>")
+            lic_text = remove_control_characters(lic_text)
             sbom_file_object.write(lic_text)
             sbom_file_object.write("</text>\n")
 
@@ -619,7 +640,7 @@ def main():
 
     if debug_mode:
         print("DEBUG: Debug mode is enabled.", file=sys.stderr)
-    print(f"Creating SPDX SBOM for PyPI package {main_package_name}")
+    print(f"Creating SPDX 2.3 SBOM for PyPI package {main_package_name}")
 
     sbom_filename = "" # Initialize for cleanup in case of early error
     try:
@@ -631,7 +652,8 @@ def main():
         main_version = main_info["version"]
         main_package_dashed = dash_name(main_package_name)
 
-        sbom_filename = f"{main_package_dashed}-{main_version}.spdx"
+        fd, sbom_filename = tempfile.mkstemp(suffix = '.spdx')
+
         aboutcode_licenses = []
         custom_licenses = []
         unknown_licenses = []
@@ -706,7 +728,8 @@ def main():
                 sbom.write(f"LicenseID: {about_license['id']}\n")
                 license_name = about_license['id'].replace('LicenseRef-', '')
                 sbom.write(f"LicenseName: {license_name}\n")
-                sbom.write(f"ExtractedText: <text>{about_license['text']}</text>\n")
+                license_text = remove_control_characters(about_license['text'])
+                sbom.write(f"ExtractedText: <text>{license_text}</text>\n")
 
             for cust_license in custom_licenses:
                 _process_custom_license_file(cust_license, sbom, debug_mode)
@@ -717,19 +740,25 @@ def main():
                 sbom.write(f"LicenseID: {unk_license['id']}\n")
                 license_name = unk_license['id'].replace('LicenseRef-', '')
                 sbom.write(f"LicenseName: {license_name}\n")
-                sbom.write(f"ExtractedText: <text>{unk_license['text']}</text>\n")
+                license_text = remove_control_characters(unk_license['text'])
+                sbom.write(f"ExtractedText: <text>{license_text}</text>\n")
+
+        # Close the file descriptor
+        os.close(fd)
 
         # Convert to JSON, RDF, XML or YAML format if needed
+        new_sbom_filename = f"{main_package_dashed}-{main_version}" + ".spdx"
         if args.json:
-            new_sbom_filename = sbom_filename + ".json"
+            new_sbom_filename = new_sbom_filename + ".json"
         elif args.rdf:
-            new_sbom_filename = sbom_filename + ".rdf"
+            new_sbom_filename = new_sbom_filename + ".rdf"
         elif args.xml:
-            new_sbom_filename = sbom_filename + ".xml"
+            new_sbom_filename = new_sbom_filename + ".xml"
         elif args.yaml:
-            new_sbom_filename = sbom_filename + ".yaml"
+            new_sbom_filename = new_sbom_filename + ".yaml"
         else:
-            print(f"SBOM successfully created: {sbom_filename}")
+            os.rename(sbom_filename, new_sbom_filename)
+            print(f"SBOM successfully created: {new_sbom_filename}")
             sys.exit(0)
 
         document = parse_file(sbom_filename)

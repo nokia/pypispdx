@@ -14,7 +14,7 @@ where “package” is a Python package available on https://pypi.org/
 options:
   -h, --help            Shows this help message and exits.
   --debug               Enables debug output, including detailed messages and full tracebacks.
-  -v, --version         Show the program version and exit.
+  -v, --version         Shows the program version and exits.
   --json                Output the result in SPDX JSON format.
   --rdf                 Output the result in SPDX RDF format.
   --xml                 Output the result in SPDX XML format.
@@ -138,3 +138,18 @@ Cannot create SBOM for google-ads-reports
 ```
 
 The SBOM cannot be created as ```google-ads-reports``` cannot currently be installed with Python 3.14.
+
+# History
+
+What is new in version 0.2.1
+
+* Control characters are removed from License and Copyright text
+* SPDX license list is 3.28
+* Better handling of ClearlyDefined failure, SBOM is not created
+* Message says that SBOM is created in SPDX 2.3
+* Creating SBOM in JSON, RDF, XML or YAML format will not erase existing SBOM in tag:value format
+
+What is new in version 0.2.0
+
+* If license cannot be found in <https://pypi.org>, it will be searched in cache file, then on <https://clearlydefined.io>
+* The package Copyright text will taken from <https://clearlydefined.io> if it is present there
