@@ -30,7 +30,7 @@ from spdx_tools.spdx.writer.write_anything import write_file
 SPDX_VERSION = "SPDX-2.3"
 DATA_LICENSE = "CC0-1.0"
 SPDX_DOCUMENT_REF = "SPDXRef-DOCUMENT"
-VERSION = "0.2.1"
+VERSION = "0.3.0"
 CREATOR_TOOL = f"pypispdx - {VERSION}"
 LICENSE_LIST_VERSION = "3.28"
 CISA_SBOM_TYPE = "Analyzed"
@@ -142,10 +142,15 @@ def get_aboutcode_license_text(license_key: str) -> str:
 
     base_url = "https://scancode-licensedb.aboutcode.org"
 
-    # Fetch the license text directly
-    text_url = f"{base_url}/{license_key}.LICENSE"
-    response = requests.get(text_url)
-    response.raise_for_status()
+    try:
+        # Fetch the license text directly
+        text_url = f"{base_url}/{license_key}.LICENSE"
+        response = requests.get(text_url, timeout=30)
+        response.raise_for_status()
+
+    except requests.exceptions.RequestException:
+        print(f"Could not get license text for {license_key}", file=sys.stderr)
+        raise
 
     if license_key == "public-domain":
         return "This software is public domain"
@@ -242,7 +247,7 @@ def get_package_info(package_name: str, debug_mode: bool) -> dict | None:
     if debug_mode:
         print(f"DEBUG: Fetching package info from: {url}", file=sys.stderr)
     try:
-        response = requests.get(url, timeout=10) # Added timeout for robustness
+        response = requests.get(url, timeout=30)
         if debug_mode:
             print(f"DEBUG: Response status for {package_name}: {response.status_code}", file=sys.stderr)
         response.raise_for_status() # Raises HTTPError for bad responses (4xx or 5xx)
@@ -319,6 +324,91 @@ def print_spdx_header(package_name: str, package_version: str, sbom_file_object)
     sbom_file_object.write(f"This SBOM was created with Python version {platform.python_version()}")
     sbom_file_object.write("</text>\n\n")
 
+def print_spdx3_header(package_name: str, package_version: str, sbom_file_object) -> None:
+    """
+    Prints the SPDX 3 header to the SBOM file.
+
+    Args:
+    - package_name (str): The name of the main package.
+    - package_version (str): The version of the main package.
+    - sbom_file_object (io.TextIOWrapper): The SBOM file object where to write.
+    """
+    dashed_package_name = dash_name(package_name)
+
+    sbom_file_object.write('{\n')
+    sbom_file_object.write('    "@context": "https://spdx.org/rdf/3.0.1/spdx-context.jsonld",\n')
+    sbom_file_object.write('    "@graph": [\n')
+    sbom_file_object.write('        {\n')
+    sbom_file_object.write('            "@id": "_:creationInfo",\n')
+    sbom_file_object.write('            "type": "CreationInfo",\n')
+    sbom_file_object.write('            "specVersion": "3.0.1",\n')
+
+    organization = os.getenv("ORGANIZATION", "UNKNOWN")
+    sbom_file_object.write('            "createdBy": [\n')
+    sbom_file_object.write(f'                "https://spdx.org/spdxdocs/SPDXRef-{organization}"\n')
+    sbom_file_object.write('            ],\n')
+    sbom_file_object.write('            "createdUsing": [\n')
+    sbom_file_object.write('                "https://pypi.org/spdxdocs/SPDXRef-pypispdx"\n')
+    sbom_file_object.write('            ],\n')
+
+    # Use datetime.UTC if available (Python 3.11+), otherwise use datetime.timezone.utc
+    utc_tz = getattr(datetime, 'UTC', datetime.timezone.utc)
+    created = datetime.datetime.now(utc_tz).strftime('%Y-%m-%dT%H:%M:%SZ')
+    sbom_file_object.write(f'            "created": "{created}",\n')
+
+    sbom_file_object.write(f'            "comment": "This SBOM was created with Python version {platform.python_version()}"\n')
+    sbom_file_object.write('        },\n')
+
+    sbom_file_object.write('        {\n')
+    sbom_file_object.write('            "spdxId": "https://spdx.org/spdxdocs/spdxdocument",\n')
+    sbom_file_object.write('            "type": "SpdxDocument",\n')
+    sbom_file_object.write('            "name": "spdxdocument",\n')
+    sbom_file_object.write('            "dataLicense": "https://spdx.org/spdxdocs/SPDXRef-CC0-1.0",\n')
+    sbom_file_object.write('            "rootElement": [\n')
+    sbom_file_object.write('                "https://spdx.org/spdxdocs/software_Sbom"\n')
+    sbom_file_object.write('            ],\n')
+    sbom_file_object.write('            "profileConformance": [\n')
+    sbom_file_object.write('                "core",\n')
+    sbom_file_object.write('                "software",\n')
+    sbom_file_object.write('                "simpleLicensing"\n')
+    sbom_file_object.write('            ],\n')
+    sbom_file_object.write('            "creationInfo": "_:creationInfo"\n')
+    sbom_file_object.write('        },\n')
+
+    sbom_file_object.write('        {\n')
+    sbom_file_object.write('            "spdxId": "https://spdx.org/spdxdocs/software_Sbom",\n')
+    sbom_file_object.write('            "type": "software_Sbom",\n')
+    sbom_file_object.write(f'            "name": "{dashed_package_name}-{package_version}",\n')
+    sbom_file_object.write('            "rootElement": [\n')
+    sbom_file_object.write(f'                "https://spdx.org/spdxdocs/SPDXRef-{dashed_package_name}"\n')
+    sbom_file_object.write('            ],\n')
+    sbom_file_object.write('            "software_sbomType": [\n')
+    sbom_file_object.write(f'                "{CISA_SBOM_TYPE.lower()}"\n')
+    sbom_file_object.write('            ],\n')
+    sbom_file_object.write('            "creationInfo": "_:creationInfo"\n')
+    sbom_file_object.write('        },\n')
+
+    sbom_file_object.write('        {\n')
+    sbom_file_object.write('            "spdxId": "https://pypi.org/spdxdocs/SPDXRef-pypispdx",\n')
+    sbom_file_object.write('            "type": "Tool",\n')
+    sbom_file_object.write(f'            "name": "{CREATOR_TOOL}",\n')
+    sbom_file_object.write('            "creationInfo": "_:creationInfo"\n')
+    sbom_file_object.write('        },\n')
+
+    sbom_file_object.write('        {\n')
+    sbom_file_object.write(f'            "spdxId": "https://spdx.org/spdxdocs/SPDXRef-{organization}",\n')
+    sbom_file_object.write('            "type": "Organization",\n')
+    sbom_file_object.write(f'            "name": "{organization}",\n')
+    sbom_file_object.write('            "creationInfo": "_:creationInfo"\n')
+    sbom_file_object.write('        },\n')
+
+    sbom_file_object.write('        {\n')
+    sbom_file_object.write('            "spdxId": "https://spdx.org/spdxdocs/SPDXRef-pypi",\n')
+    sbom_file_object.write('            "type": "Organization",\n')
+    sbom_file_object.write('            "name": "pypi.org",\n')
+    sbom_file_object.write('            "creationInfo": "_:creationInfo"\n')
+    sbom_file_object.write('        },\n')
+
 def _get_spdx_license_from_classifiers(classifiers: list, unknown_licenses_list: list, debug_mode: bool) -> str | None:
     """
     Determines the SPDX license identifier(s) from PyPI classifiers.
@@ -355,7 +445,9 @@ def _get_spdx_license_from_classifiers(classifiers: list, unknown_licenses_list:
     return None
 
 def print_package(package_name: str, package_version: str, sbom_file_object,
-                  aboutcode_licenses_list: list, custom_licenses_list: list, unknown_licenses_list: list, debug_mode: bool) -> None:
+                  aboutcode_licenses_list: list, custom_licenses_list: list, unknown_licenses_list: list,
+                  debug_mode: bool,
+                  spdx3: bool) -> None:
     """
     Prints the SPDX package information to the SBOM file.
 
@@ -367,6 +459,7 @@ def print_package(package_name: str, package_version: str, sbom_file_object,
     - custom_licenses_list (list): A list to store custom license details.
     - unknown_licenses_list (list): A list to store unknown license details.
     - debug_mode (bool): If True, print debug information.
+    - spdx3 (bool): If True, use SPDX 3 format
     """
     dashed_package_name = dash_name(package_name)
     if debug_mode:
@@ -378,11 +471,20 @@ def print_package(package_name: str, package_version: str, sbom_file_object,
 
     info = package_info["info"]
 
-    sbom_file_object.write(f"##### Package: {dashed_package_name}\n\n")
-    sbom_file_object.write(f"PackageName: {dashed_package_name}\n")
-    sbom_file_object.write(f"SPDXID: SPDXRef-{dashed_package_name}\n")
-    sbom_file_object.write(f"PackageVersion: {package_version}\n")
-    sbom_file_object.write(f"PackageSupplier: {PACKAGE_SUPPLIER}\n")
+    if not spdx3:
+        sbom_file_object.write(f"##### Package: {dashed_package_name}\n\n")
+        sbom_file_object.write(f"PackageName: {dashed_package_name}\n")
+        sbom_file_object.write(f"SPDXID: SPDXRef-{dashed_package_name}\n")
+        sbom_file_object.write(f"PackageVersion: {package_version}\n")
+        sbom_file_object.write(f"PackageSupplier: {PACKAGE_SUPPLIER}\n")
+    else:
+        sbom_file_object.write('        {\n')
+        sbom_file_object.write(f'            "spdxId": "https://spdx.org/spdxdocs/SPDXRef-{dashed_package_name}",\n')
+        sbom_file_object.write('            "type": "software_Package",\n')
+        sbom_file_object.write(f'            "name": "{dashed_package_name}",\n')
+        sbom_file_object.write(f'            "software_packageVersion": "{package_version}",\n')
+        sbom_file_object.write('            "suppliedBy": "https://spdx.org/spdxdocs/SPDXRef-pypi",\n')
+        sbom_file_object.write(f'            "software_packageUrl": "pkg:pypi/{dashed_package_name}@{package_version}",\n')
 
     download_location = "NOASSERTION"
     sha256 = ""
@@ -413,14 +515,38 @@ def print_package(package_name: str, package_version: str, sbom_file_object,
         if debug_mode:
             print(f"DEBUG: No releases found for {package_name}@{package_version}.", file=sys.stderr)
 
+    if not spdx3:
+        sbom_file_object.write(f"PackageDownloadLocation: {download_location}\n")
+        sbom_file_object.write(f"FilesAnalyzed: {FILES_ANALYZED}\n")
+    else:
+        sbom_file_object.write(f'            "software_downloadLocation": "{download_location}",\n')
 
-    sbom_file_object.write(f"PackageDownloadLocation: {download_location}\n")
-    sbom_file_object.write(f"FilesAnalyzed: {FILES_ANALYZED}\n")
+    if spdx3 and (sha256 or md5):
+        sbom_file_object.write('            "verifiedUsing": [\n')
+        sbom_file_object.write('                {\n')
 
     if sha256:
-        sbom_file_object.write(f"PackageChecksum: SHA256: {sha256}\n")
+        if not spdx3:
+            sbom_file_object.write(f"PackageChecksum: SHA256: {sha256}\n")
+        else:
+            sbom_file_object.write('                    "type": "Hash",\n')
+            sbom_file_object.write('                    "algorithm": "sha256",\n')
+            sbom_file_object.write(f'                    "hashValue": "{sha256}"\n')
+
     if md5:
-        sbom_file_object.write(f"PackageChecksum: MD5: {md5}\n")
+        if not spdx3:
+            sbom_file_object.write(f"PackageChecksum: MD5: {md5}\n")
+        else:
+            if sha256:
+                sbom_file_object.write('                },\n')
+                sbom_file_object.write('                {\n')
+            sbom_file_object.write('                    "type": "Hash",\n')
+            sbom_file_object.write('                    "algorithm": "md5",\n')
+            sbom_file_object.write(f'                    "hashValue": "{md5}"\n')
+
+    if spdx3 and (sha256 or md5):
+        sbom_file_object.write('                }\n')
+        sbom_file_object.write('            ],\n')
 
     spdx_license = info.get("license_expression")
     if debug_mode:
@@ -499,28 +625,80 @@ def print_package(package_name: str, package_version: str, sbom_file_object,
             if about not in aboutcode_licenses_list:
                 aboutcode_licenses_list.append(about)
 
-    sbom_file_object.write(f"PackageLicenseConcluded: {spdx_license}\n")
-    sbom_file_object.write(f"PackageLicenseDeclared: {spdx_license}\n")
+    if not spdx3:
+        sbom_file_object.write(f"PackageLicenseConcluded: {spdx_license}\n")
+        sbom_file_object.write(f"PackageLicenseDeclared: {spdx_license}\n")
+
+    if spdx3:
+        sbom_file_object.write('            "creationInfo": "_:creationInfo",\n')
 
     package_copyright = get_pypi_package_copyright(dashed_package_name, package_version, debug_mode)
     if len(package_copyright) == 0:
-        sbom_file_object.write("PackageCopyrightText: NOASSERTION\n")
+        if not spdx3:
+            sbom_file_object.write("PackageCopyrightText: NOASSERTION\n")
+        else:
+            sbom_file_object.write('            "software_copyrightText": "NOASSERTION"\n')
+            sbom_file_object.write('        },\n')
     else:
-        sbom_file_object.write("PackageCopyrightText: <text>")
-        for c in package_copyright:
-            c = remove_control_characters(c)
-            sbom_file_object.write(f"{c}\n")
-        sbom_file_object.write("</text>\n")
+        if not spdx3:
+            sbom_file_object.write("PackageCopyrightText: <text>")
+            for c in package_copyright:
+                c = remove_control_characters(c)
+                sbom_file_object.write(f"{c}\n")
+            sbom_file_object.write("</text>\n")
+        else:
+            sbom_file_object.write('            "software_copyrightText": "')
+            for c in package_copyright:
+                copy = c.replace('"', '\\"') # protect double quote
+                copy = remove_control_characters(copy)
+                sbom_file_object.write(f"{copy}\\n")
+            sbom_file_object.write('"\n        },\n')
 
-    sbom_file_object.write(f"ExternalRef: {PURL_EXTERNAL_REF_TYPE}{dashed_package_name}@{package_version}\n\n")
+    if not spdx3:
+        sbom_file_object.write(f"ExternalRef: {PURL_EXTERNAL_REF_TYPE}{dashed_package_name}@{package_version}\n\n")
 
-def _process_custom_license_file(custom_license_entry: dict, sbom_file_object, debug_mode: bool) -> None:
+    if spdx3:
+        sbom_file_object.write('        {\n')
+        sbom_file_object.write(f'            "spdxId": "https://spdx.org/spdxdocs/SPDXRef-LicenseExpression-{dashed_package_name}",\n')
+        sbom_file_object.write('            "type": "simplelicensing_LicenseExpression",\n')
+        sbom_file_object.write(f'            "simplelicensing_licenseExpression": "{spdx_license}",\n')
+        sbom_file_object.write(f'            "simplelicensing_licenseListVersion": "{LICENSE_LIST_VERSION}.0",\n')
+        sbom_file_object.write('            "creationInfo": "_:creationInfo"\n')
+        sbom_file_object.write('        },\n')
+        if spdx_license.startswith("LicenseRef-"):
+            for lic in custom_licenses_list:
+                if lic["id"] == spdx_license:
+                    _process_custom_license_file(lic, sbom_file_object, spdx3, debug_mode)
+
+        sbom_file_object.write('        {\n')
+        sbom_file_object.write(f'            "spdxId": "https://spdx.org/spdxdocs/relationshipconcluded-{dashed_package_name}",\n')
+        sbom_file_object.write('            "type": "Relationship",\n')
+        sbom_file_object.write('            "relationshipType": "hasConcludedLicense",\n')
+        sbom_file_object.write(f'            "from": "https://spdx.org/spdxdocs/SPDXRef-{dashed_package_name}",\n')
+        sbom_file_object.write('            "to": [\n')
+        sbom_file_object.write(f'                "https://spdx.org/spdxdocs/SPDXRef-LicenseExpression-{dashed_package_name}"\n')
+        sbom_file_object.write('            ],\n')
+        sbom_file_object.write('            "creationInfo": "_:creationInfo"\n')
+        sbom_file_object.write('        },\n')
+        sbom_file_object.write('        {\n')
+        sbom_file_object.write(f'            "spdxId": "https://spdx.org/spdxdocs/relationshipdeclared-{dashed_package_name}",\n')
+        sbom_file_object.write('            "type": "Relationship",\n')
+        sbom_file_object.write('            "relationshipType": "hasDeclaredLicense",\n')
+        sbom_file_object.write(f'            "from": "https://spdx.org/spdxdocs/SPDXRef-{dashed_package_name}",\n')
+        sbom_file_object.write('            "to": [\n')
+        sbom_file_object.write(f'                "https://spdx.org/spdxdocs/SPDXRef-LicenseExpression-{dashed_package_name}"\n')
+        sbom_file_object.write('            ],\n')
+        sbom_file_object.write('            "creationInfo": "_:creationInfo"\n')
+        sbom_file_object.write('        },\n')
+
+def _process_custom_license_file(custom_license_entry: dict, sbom_file_object, spdx3: bool, debug_mode: bool) -> None:
     """
     Downloads, extracts, and writes the text of a custom license to the SBOM.
 
     Args:
     - custom_license_entry (dict): Dictionary containing 'id', 'file', and 'download_location'.
     - sbom_file_object (io.TextIOWrapper): The SBOM file object where to write.
+    - spdx3 (bool): If True, export in SPDX 3.
     - debug_mode (bool): If True, print debug information.
     """
     license_id = custom_license_entry["id"]
@@ -530,12 +708,24 @@ def _process_custom_license_file(custom_license_entry: dict, sbom_file_object, d
     if debug_mode:
         print(f"DEBUG: Processing custom license '{license_id}' from '{download_url}'", file=sys.stderr)
 
-    sbom_file_object.write(f"LicenseID: {license_id}\n")
     license_name = license_id.replace('LicenseRef-', '')
-    sbom_file_object.write(f"LicenseName: {license_name}\n")
+
+    if not spdx3:
+        sbom_file_object.write(f"LicenseID: {license_id}\n")
+        sbom_file_object.write(f"LicenseName: {license_name}\n")
 
     if download_url == "NOASSERTION":
-        sbom_file_object.write("ExtractedText: <text>License file not available for download.</text>\n")
+        if not spdx3:
+            sbom_file_object.write("ExtractedText: <text>License file not available for download.</text>\n")
+        else:
+            sbom_file_object.write('        {\n')
+            sbom_file_object.write(f'            "spdxId": "https://spdx.org/spdxdocs/{license_id}",\n')
+            sbom_file_object.write('            "type": "expandedlicensing_CustomLicense",\n')
+            sbom_file_object.write('            "simplelicensing_licenseText": "License file not available for download.",\n')
+            sbom_file_object.write(f'            "name": "{license_id}",\n')
+            sbom_file_object.write('            "creationInfo": "_:creationInfo"\n')
+            sbom_file_object.write('        },\n')
+
         if debug_mode:
             print(f"DEBUG: Custom license '{license_id}' has NOASSERTION download location.", file=sys.stderr)
         return
@@ -568,10 +758,22 @@ def _process_custom_license_file(custom_license_entry: dict, sbom_file_object, d
             with open(extracted_file_path, "rb") as lic_f:
                 lic_text = lic_f.read().decode("utf-8", errors='replace') # Use 'replace' for encoding errors
 
-            sbom_file_object.write("ExtractedText: <text>")
-            lic_text = remove_control_characters(lic_text)
-            sbom_file_object.write(lic_text)
-            sbom_file_object.write("</text>\n")
+            if not spdx3:
+                sbom_file_object.write("ExtractedText: <text>")
+                lic_text = remove_control_characters(lic_text)
+                sbom_file_object.write(lic_text)
+                sbom_file_object.write("</text>\n")
+            else:
+                lic_text = lic_text.replace('"', '\\"') # protect double quote
+                lic_text = lic_text.replace("\n", "\\n")
+                lic_text = remove_control_characters(lic_text)
+                sbom_file_object.write('        {\n')
+                sbom_file_object.write(f'            "spdxId": "https://spdx.org/spdxdocs/{license_id}",\n')
+                sbom_file_object.write('            "type": "expandedlicensing_CustomLicense",\n')
+                sbom_file_object.write(f'            "simplelicensing_licenseText": "{lic_text}",\n')
+                sbom_file_object.write(f'            "name": "{license_id}",\n')
+                sbom_file_object.write('            "creationInfo": "_:creationInfo"\n')
+                sbom_file_object.write('        },\n')
 
     except (urllib.error.URLError, tarfile.ReadError, IOError, PyPISPDXError) as e:
         print(f"Warning: Could not process custom license '{license_id}' from '{download_url}': {e}", file=sys.stderr)
@@ -633,14 +835,28 @@ def main():
         action="store_true",
         help="Output the result in SPDX YAML format."
     )
+    spdxformat.add_argument(
+        "--spdx3",
+        action="store_true",
+        help="Output the result in SPDX 3.0.1 JSON format."
+    )
     args = parser.parse_args()
 
     main_package_name = args.package_name
     debug_mode = args.debug
 
+    if args.spdx3:
+        spdx3 = True
+    else:
+        spdx3 = False
+
     if debug_mode:
         print("DEBUG: Debug mode is enabled.", file=sys.stderr)
-    print(f"Creating SPDX 2.3 SBOM for PyPI package {main_package_name}")
+
+    if not spdx3:
+        print(f"Creating SPDX 2.3 SBOM for PyPI package {main_package_name}")
+    else:
+        print(f"Creating SPDX 3.0.1 SBOM for PyPI package {main_package_name}")
 
     sbom_filename = "" # Initialize for cleanup in case of early error
     try:
@@ -659,8 +875,11 @@ def main():
         unknown_licenses = []
 
         with open(sbom_filename, "w", encoding="utf-8") as sbom:
-            print_spdx_header(main_package_name, main_version, sbom)
-            print_package(main_package_name, main_version, sbom, aboutcode_licenses, custom_licenses, unknown_licenses, debug_mode)
+            if spdx3:
+                print_spdx3_header(main_package_name, main_version, sbom)
+            else:
+                print_spdx_header(main_package_name, main_version, sbom)
+            print_package(main_package_name, main_version, sbom, aboutcode_licenses, custom_licenses, unknown_licenses, debug_mode, spdx3)
 
             # Use subprocess.run for better control over external commands
             temp_json_report = f"{main_package_dashed}_pip_report.json"
@@ -708,40 +927,115 @@ def main():
             for dep in dependencies:
                 dep_name_dashed = dash_name(dep["name"])
                 if dep_name_dashed != main_package_dashed: # Avoid re-printing the main package
-                    print_package(dep["name"], dep["version"], sbom, aboutcode_licenses, custom_licenses, unknown_licenses, debug_mode)
+                    print_package(dep["name"], dep["version"], sbom, aboutcode_licenses, custom_licenses, unknown_licenses, debug_mode, spdx3)
 
-            sbom.write("##### Relationships\n\n")
-            sbom.write(f"Relationship: {SPDX_DOCUMENT_REF} DESCRIBES SPDXRef-{main_package_dashed}\n")
+            if not spdx3:
+                sbom.write("##### Relationships\n\n")
+                sbom.write(f"Relationship: {SPDX_DOCUMENT_REF} DESCRIBES SPDXRef-{main_package_dashed}\n")
+            else:
+                sbom.write('        {\n')
+                sbom.write('            "spdxId": "https://spdx.org/spdxdocs/SPDXRef-CC0-1.0",\n')
+                sbom.write('            "type": "simplelicensing_LicenseExpression",\n')
+                sbom.write('            "simplelicensing_licenseExpression": "CC0-1.0",\n')
+                sbom.write('            "creationInfo": "_:creationInfo"\n')
+                sbom.write('        },\n')
 
+                sbom.write('        {\n')
+                sbom.write('            "spdxId": "https://pypi.org/describes",\n')
+                sbom.write('            "type": "Relationship",\n')
+                sbom.write('            "relationshipType": "describes",\n')
+                sbom.write('            "from": "https://spdx.org/spdxdocs/spdxdocument",\n')
+                sbom.write('            "to": [\n')
+                sbom.write(f'                "https://spdx.org/spdxdocs/SPDXRef-{main_package_dashed}"\n')
+                sbom.write('            ],\n')
+                sbom.write('            "creationInfo": "_:creationInfo"\n')
+                if len(dependencies) == 1: # Only main package
+                    sbom.write('        }')
+                else:
+                    sbom.write('        },\n')
+
+            first = True
             for dep in dependencies:
                 dep_name_dashed = dash_name(dep["name"])
                 if dep_name_dashed != main_package_dashed:
-                    sbom.write(f"Relationship: SPDXRef-{main_package_dashed} CONTAINS SPDXRef-{dep_name_dashed}\n")
+                    if not spdx3:
+                        sbom.write(f"Relationship: SPDXRef-{main_package_dashed} CONTAINS SPDXRef-{dep_name_dashed}\n")
+                    else:
+                        if not first:
+                            sbom.write(',\n')
+                        else:
+                            first = False
+                        sbom.write('        {\n')
+                        sbom.write(f'            "spdxId": "https://pypi.org/contains-{dep_name_dashed}",\n')
+                        sbom.write('            "type": "Relationship",\n')
+                        sbom.write('            "relationshipType": "contains",\n')
+                        sbom.write(f'            "from": "https://spdx.org/spdxdocs/SPDXRef-{main_package_dashed}",\n')
+                        sbom.write('            "to": [\n')
+                        sbom.write(f'                "https://spdx.org/spdxdocs/SPDXRef-{dep_name_dashed}"\n')
+                        sbom.write('            ],\n')
+                        sbom.write('            "creationInfo": "_:creationInfo"\n')
+                        sbom.write('        }')
 
             # Print aboutcode, custom and unknown licenses if any were found
             if aboutcode_licenses or custom_licenses or unknown_licenses:
-                sbom.write("\n##### Custom licenses\n\n")
+                if not spdx3:
+                    sbom.write("\n##### Custom licenses\n\n")
 
             for about_license in aboutcode_licenses:
+                license_id = about_license['id']
+                license_name = license_id.replace('LicenseRef-', '')
+                license_text = about_license['text']
                 if debug_mode:
-                    print(f"DEBUG: Adding AboutCode license: {about_license['id']}", file=sys.stderr)
-                sbom.write(f"LicenseID: {about_license['id']}\n")
-                license_name = about_license['id'].replace('LicenseRef-', '')
-                sbom.write(f"LicenseName: {license_name}\n")
-                license_text = remove_control_characters(about_license['text'])
-                sbom.write(f"ExtractedText: <text>{license_text}</text>\n")
+                    print(f"DEBUG: Adding AboutCode license: {license_id}", file=sys.stderr)
+                if not spdx3:
+                    sbom.write(f"LicenseID: {license_id}\n")
+                    sbom.write(f"LicenseName: {license_name}\n")
+                    license_text = remove_control_characters(license_text)
+                    sbom.write(f"ExtractedText: <text>{license_text}</text>\n")
+                else:
+                    sbom.write(',\n')
+                    license_text = license_text.replace('"', '\\"') # protect double quote
+                    license_text = license_text.replace("\n", "\\n")
+                    license_text = remove_control_characters(license_text)
+                    sbom.write('        {\n')
+                    sbom.write(f'            "spdxId": "https://spdx.org/spdxdocs/{license_id}",\n')
+                    sbom.write('            "type": "expandedlicensing_CustomLicense",\n')
+                    sbom.write(f'            "simplelicensing_licenseText": "{license_text}",\n')
+                    sbom.write(f'            "name": "{license_id}",\n')
+                    sbom.write('            "creationInfo": "_:creationInfo"\n')
+                    sbom.write('        }')
 
             for cust_license in custom_licenses:
-                _process_custom_license_file(cust_license, sbom, debug_mode)
+                if not spdx3:
+                    _process_custom_license_file(cust_license, sbom, spdx3, debug_mode)
 
             for unk_license in unknown_licenses:
                 if debug_mode:
                     print(f"DEBUG: Adding unknown license: {unk_license['id']}", file=sys.stderr)
-                sbom.write(f"LicenseID: {unk_license['id']}\n")
-                license_name = unk_license['id'].replace('LicenseRef-', '')
-                sbom.write(f"LicenseName: {license_name}\n")
-                license_text = remove_control_characters(unk_license['text'])
-                sbom.write(f"ExtractedText: <text>{license_text}</text>\n")
+                license_id = unk_license['id']
+                license_name = license_id.replace('LicenseRef-', '')
+                license_text = unk_license['text']
+                if not spdx3:
+                    license_text = remove_control_characters(license_text)
+                    sbom.write(f"LicenseID: {license_id}\n")
+                    sbom.write(f"LicenseName: {license_name}\n")
+                    sbom.write(f"ExtractedText: <text>{license_text}</text>\n")
+                else:
+                    sbom.write(',\n')
+                    license_text = license_text.replace('"', '\\"') # protect double quote
+                    license_text = license_text.replace("\n", "\\n")
+                    license_text = remove_control_characters(license_text)
+                    sbom.write('        {\n')
+                    sbom.write(f'            "spdxId": "https://spdx.org/spdxdocs/{license_id}",\n')
+                    sbom.write('            "type": "expandedlicensing_CustomLicense",\n')
+                    sbom.write(f'            "simplelicensing_licenseText": "{license_text}",\n')
+                    sbom.write(f'            "name": "{license_id}",\n')
+                    sbom.write('            "creationInfo": "_:creationInfo"\n')
+                    sbom.write('        }')
+
+            if spdx3:
+                sbom.write('\n    ]\n')
+                sbom.write('}\n')
 
         # Close the file descriptor
         os.close(fd)
@@ -756,6 +1050,11 @@ def main():
             new_sbom_filename = new_sbom_filename + ".xml"
         elif args.yaml:
             new_sbom_filename = new_sbom_filename + ".yaml"
+        elif args.spdx3:
+            new_sbom_filename = new_sbom_filename + "3.json"
+            os.rename(sbom_filename, new_sbom_filename)
+            print(f"SBOM successfully created: {new_sbom_filename}")
+            sys.exit(0)
         else:
             os.rename(sbom_filename, new_sbom_filename)
             print(f"SBOM successfully created: {new_sbom_filename}")

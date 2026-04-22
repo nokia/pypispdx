@@ -5,7 +5,7 @@ An SCA tool for creating an SPDX SBOM for a https://pypi.org/ package.
 # Usage
 
 ```
-usage: pypispdx [-h] [--json | --rdf | --xml | --yaml] [--debug] package
+usage: pypispdx [-h] [--json | --rdf | --xml | --yaml | --spdx3] [--debug] package
 ```
 
 where “package” is a Python package available on https://pypi.org/
@@ -15,13 +15,14 @@ options:
   -h, --help            Shows this help message and exits.
   --debug               Enables debug output, including detailed messages and full tracebacks.
   -v, --version         Shows the program version and exits.
-  --json                Output the result in SPDX JSON format.
-  --rdf                 Output the result in SPDX RDF format.
-  --xml                 Output the result in SPDX XML format.
-  --yaml                Output the result in SPDX YAML format.
+  --json                Output the result in SPDX 2.3 JSON format.
+  --rdf                 Output the result in SPDX 2.3 RDF format.
+  --xml                 Output the result in SPDX 2.3 XML format.
+  --yaml                Output the result in SPDX 2.3 YAML format.
+  --spdx3               Output the result in SPDX 3.0.1 JSON-LD format.
 ```
 
-It will create an SPDX 2.3 SBOM for the latest available release of the package,
+It will create an SPDX 2.3 or 3.0.1 SBOM for the latest available release of the package,
 including all transitive dependencies.
 
 By default, the output will be in tag:value format. The other formats, JSON, RDF,
@@ -106,11 +107,21 @@ Dot “.” is replaced with dash “-”.
 
 ## Compliance
 
+### SPDX 2.3
+
 The SBOM is valid SPDX 2.3.
 
 It is compliant with the [OpenChain Telco SBOM Guide](https://github.com/OpenChain-Project/Telco-WG/blob/main/OpenChain-Telco-SBOM-Guide_EN.md).
 
 You can check it with the [openchain-telco-sbom-validator](https://pypi.org/project/openchain-telco-sbom-validator/).
+
+### SPDX 3.0.1
+
+The SBOM is valid SPDX 3.0.1.
+
+You can check it with:
+* https://github.com/spdx/tools-java (in Java)
+* https://pypi.org/project/spdx3-validate/ (in Python)
 
 ## When an SBOM cannot be created
 
@@ -140,6 +151,11 @@ Cannot create SBOM for google-ads-reports
 The SBOM cannot be created as ```google-ads-reports``` cannot currently be installed with Python 3.14.
 
 # History
+
+What is new in version 0.3.0
+
+* Add an option to create the SBOM in SPDX 3.0.1
+* This is experimental
 
 What is new in version 0.2.1
 
