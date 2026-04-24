@@ -25,7 +25,10 @@ options:
 It will create an SPDX 2.3 or 3.0.1 SBOM for the latest available release of the package,
 including all transitive dependencies.
 
-By default, the output will be in tag:value format. The other formats, JSON, RDF,
+Network access is needed when running the tool, it will access <https://pypi.org>
+and <https://clearlydefined.io>.
+
+By default, the SPDX 2.3 output will be in tag:value format. The other formats, JSON, RDF,
 XML and YAML are available by using the corresponding command-line option.
 
 The SBOM filename will be ```package-version.spdx``` (plus the corresponding
