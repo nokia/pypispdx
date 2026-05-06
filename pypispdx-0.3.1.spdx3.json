@@ -1,0 +1,1209 @@
+{
+    "@context": "https://spdx.org/rdf/3.0.1/spdx-context.jsonld",
+    "@graph": [
+        {
+            "@id": "_:creationInfo",
+            "type": "CreationInfo",
+            "specVersion": "3.0.1",
+            "createdBy": [
+                "https://spdx.org/spdxdocs/Nokia"
+            ],
+            "createdUsing": [
+                "https://pypi.org/spdxdocs/pypispdx"
+            ],
+            "created": "2026-05-06T17:14:54Z",
+            "comment": "This SBOM was created with Python version 3.14.4"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/spdxdocument",
+            "type": "SpdxDocument",
+            "name": "spdxdocument",
+            "dataLicense": "https://spdx.org/spdxdocs/CC0-1.0",
+            "rootElement": [
+                "https://spdx.org/spdxdocs/software_Sbom"
+            ],
+            "profileConformance": [
+                "core",
+                "software",
+                "simpleLicensing"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/software_Sbom",
+            "type": "software_Sbom",
+            "name": "pypispdx-0.3.1",
+            "rootElement": [
+                "https://spdx.org/spdxdocs/pypispdx"
+            ],
+            "software_sbomType": [
+                "analyzed"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://pypi.org/spdxdocs/pypispdx",
+            "type": "Tool",
+            "name": "pypispdx - 0.3.1",
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/Nokia",
+            "type": "Organization",
+            "name": "Nokia",
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/pypi",
+            "type": "Organization",
+            "name": "pypi.org",
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/pypispdx",
+            "type": "software_Package",
+            "name": "pypispdx",
+            "software_packageVersion": "0.3.1",
+            "suppliedBy": "https://spdx.org/spdxdocs/pypi",
+            "software_packageUrl": "pkg:pypi/pypispdx@0.3.1",
+            "software_downloadLocation": "https://files.pythonhosted.org/packages/37/a6/731178dd333ecfffc77d7ec1e11c1c1239178c203e3a02ee864860e258dc/pypispdx-0.3.1.tar.gz",
+            "verifiedUsing": [
+                {
+                    "type": "Hash",
+                    "algorithm": "sha256",
+                    "hashValue": "be1f3c9405417df522ba316250fb543127c557cb7bd0bbd97facbf8d1d8126f8"
+                },
+                {
+                    "type": "Hash",
+                    "algorithm": "md5",
+                    "hashValue": "00b95420aec6b616a2ad3767fe622d16"
+                }
+            ],
+            "creationInfo": "_:creationInfo",
+            "software_copyrightText": "NOASSERTION"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/LicenseExpression-pypispdx",
+            "type": "simplelicensing_LicenseExpression",
+            "simplelicensing_licenseExpression": "Apache-2.0",
+            "simplelicensing_licenseListVersion": "3.28.0",
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/relationshipconcluded-pypispdx",
+            "type": "Relationship",
+            "relationshipType": "hasConcludedLicense",
+            "from": "https://spdx.org/spdxdocs/pypispdx",
+            "to": [
+                "https://spdx.org/spdxdocs/LicenseExpression-pypispdx"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/relationshipdeclared-pypispdx",
+            "type": "Relationship",
+            "relationshipType": "hasDeclaredLicense",
+            "from": "https://spdx.org/spdxdocs/pypispdx",
+            "to": [
+                "https://spdx.org/spdxdocs/LicenseExpression-pypispdx"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/beartype",
+            "type": "software_Package",
+            "name": "beartype",
+            "software_packageVersion": "0.22.9",
+            "suppliedBy": "https://spdx.org/spdxdocs/pypi",
+            "software_packageUrl": "pkg:pypi/beartype@0.22.9",
+            "software_downloadLocation": "https://files.pythonhosted.org/packages/c7/94/1009e248bbfbab11397abca7193bea6626806be9a327d399810d523a07cb/beartype-0.22.9.tar.gz",
+            "verifiedUsing": [
+                {
+                    "type": "Hash",
+                    "algorithm": "sha256",
+                    "hashValue": "8f82b54aa723a2848a56008d18875f91c1db02c32ef6a62319a002e3e25a975f"
+                },
+                {
+                    "type": "Hash",
+                    "algorithm": "md5",
+                    "hashValue": "da867f7418a7e35ae5b8495b505000f0"
+                }
+            ],
+            "creationInfo": "_:creationInfo",
+            "software_copyrightText": "copyright 2021, @leycec\nCopyright (c) 2014-2025 Beartype\nCOPYRIGHT 2014-2025 Beartype authors\n"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/LicenseExpression-beartype",
+            "type": "simplelicensing_LicenseExpression",
+            "simplelicensing_licenseExpression": "MIT",
+            "simplelicensing_licenseListVersion": "3.28.0",
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/relationshipconcluded-beartype",
+            "type": "Relationship",
+            "relationshipType": "hasConcludedLicense",
+            "from": "https://spdx.org/spdxdocs/beartype",
+            "to": [
+                "https://spdx.org/spdxdocs/LicenseExpression-beartype"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/relationshipdeclared-beartype",
+            "type": "Relationship",
+            "relationshipType": "hasDeclaredLicense",
+            "from": "https://spdx.org/spdxdocs/beartype",
+            "to": [
+                "https://spdx.org/spdxdocs/LicenseExpression-beartype"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/boolean-py",
+            "type": "software_Package",
+            "name": "boolean-py",
+            "software_packageVersion": "5.0",
+            "suppliedBy": "https://spdx.org/spdxdocs/pypi",
+            "software_packageUrl": "pkg:pypi/boolean-py@5.0",
+            "software_downloadLocation": "https://files.pythonhosted.org/packages/c4/cf/85379f13b76f3a69bca86b60237978af17d6aa0bc5998978c3b8cf05abb2/boolean_py-5.0.tar.gz",
+            "verifiedUsing": [
+                {
+                    "type": "Hash",
+                    "algorithm": "sha256",
+                    "hashValue": "60cbc4bad079753721d32649545505362c754e121570ada4658b852a3a318d95"
+                },
+                {
+                    "type": "Hash",
+                    "algorithm": "md5",
+                    "hashValue": "1a7ec75805094c91980b9f11240853c0"
+                }
+            ],
+            "creationInfo": "_:creationInfo",
+            "software_copyrightText": "copyright 2009, Sebastian Kramer\nCopyright (c) 2009, 2010, 2013-2016 by the Brotli Authors\nCopyright (c) Sebastian Kraemer, basti.kr@gmail.com and others\nCopyright (c) 2009-2020 Sebastian Kraemer, basti.kr@gmail.com and others\n"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/LicenseExpression-boolean-py",
+            "type": "simplelicensing_LicenseExpression",
+            "simplelicensing_licenseExpression": "BSD-2-Clause",
+            "simplelicensing_licenseListVersion": "3.28.0",
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/relationshipconcluded-boolean-py",
+            "type": "Relationship",
+            "relationshipType": "hasConcludedLicense",
+            "from": "https://spdx.org/spdxdocs/boolean-py",
+            "to": [
+                "https://spdx.org/spdxdocs/LicenseExpression-boolean-py"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/relationshipdeclared-boolean-py",
+            "type": "Relationship",
+            "relationshipType": "hasDeclaredLicense",
+            "from": "https://spdx.org/spdxdocs/boolean-py",
+            "to": [
+                "https://spdx.org/spdxdocs/LicenseExpression-boolean-py"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/certifi",
+            "type": "software_Package",
+            "name": "certifi",
+            "software_packageVersion": "2026.4.22",
+            "suppliedBy": "https://spdx.org/spdxdocs/pypi",
+            "software_packageUrl": "pkg:pypi/certifi@2026.4.22",
+            "software_downloadLocation": "https://files.pythonhosted.org/packages/25/ee/6caf7a40c36a1220410afe15a1cc64993a1f864871f698c0f93acb72842a/certifi-2026.4.22.tar.gz",
+            "verifiedUsing": [
+                {
+                    "type": "Hash",
+                    "algorithm": "sha256",
+                    "hashValue": "8d455352a37b71bf76a79caa83a3d6c25afee4a385d632127b6afb3963f1c580"
+                },
+                {
+                    "type": "Hash",
+                    "algorithm": "md5",
+                    "hashValue": "238385f505d22767cd1860661f1c5743"
+                }
+            ],
+            "creationInfo": "_:creationInfo",
+            "software_copyrightText": "NOASSERTION"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/LicenseExpression-certifi",
+            "type": "simplelicensing_LicenseExpression",
+            "simplelicensing_licenseExpression": "MPL-2.0",
+            "simplelicensing_licenseListVersion": "3.28.0",
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/relationshipconcluded-certifi",
+            "type": "Relationship",
+            "relationshipType": "hasConcludedLicense",
+            "from": "https://spdx.org/spdxdocs/certifi",
+            "to": [
+                "https://spdx.org/spdxdocs/LicenseExpression-certifi"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/relationshipdeclared-certifi",
+            "type": "Relationship",
+            "relationshipType": "hasDeclaredLicense",
+            "from": "https://spdx.org/spdxdocs/certifi",
+            "to": [
+                "https://spdx.org/spdxdocs/LicenseExpression-certifi"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/charset-normalizer",
+            "type": "software_Package",
+            "name": "charset-normalizer",
+            "software_packageVersion": "3.4.7",
+            "suppliedBy": "https://spdx.org/spdxdocs/pypi",
+            "software_packageUrl": "pkg:pypi/charset-normalizer@3.4.7",
+            "software_downloadLocation": "https://files.pythonhosted.org/packages/e7/a1/67fe25fac3c7642725500a3f6cfe5821ad557c3abb11c9d20d12c7008d3e/charset_normalizer-3.4.7.tar.gz",
+            "verifiedUsing": [
+                {
+                    "type": "Hash",
+                    "algorithm": "sha256",
+                    "hashValue": "ae89db9e5f98a11a4bf50407d4363e7b09b31e55bc117b4f7d80aab97ba009e5"
+                },
+                {
+                    "type": "Hash",
+                    "algorithm": "md5",
+                    "hashValue": "68805886064d248d2e5205fd11112d85"
+                }
+            ],
+            "creationInfo": "_:creationInfo",
+            "software_copyrightText": "COPYRIGHT (c) FOOBAR\ncopyright 2023, Ahmed TAHRI\nCopyright (c) 2025 Ahmed TAHRI\nCopyright (c) 2025 TAHRI Ahmed R.\ncopyright (c) 2021 by Ahmed TAHRI\n(c) 2012 Denny Vrandecic (http://simia.net/letters/)\nCopyright (c) Ahmed TAHRI @Ousret (https://github.com/Ousret)\n"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/LicenseExpression-charset-normalizer",
+            "type": "simplelicensing_LicenseExpression",
+            "simplelicensing_licenseExpression": "MIT",
+            "simplelicensing_licenseListVersion": "3.28.0",
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/relationshipconcluded-charset-normalizer",
+            "type": "Relationship",
+            "relationshipType": "hasConcludedLicense",
+            "from": "https://spdx.org/spdxdocs/charset-normalizer",
+            "to": [
+                "https://spdx.org/spdxdocs/LicenseExpression-charset-normalizer"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/relationshipdeclared-charset-normalizer",
+            "type": "Relationship",
+            "relationshipType": "hasDeclaredLicense",
+            "from": "https://spdx.org/spdxdocs/charset-normalizer",
+            "to": [
+                "https://spdx.org/spdxdocs/LicenseExpression-charset-normalizer"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/click",
+            "type": "software_Package",
+            "name": "click",
+            "software_packageVersion": "8.3.3",
+            "suppliedBy": "https://spdx.org/spdxdocs/pypi",
+            "software_packageUrl": "pkg:pypi/click@8.3.3",
+            "software_downloadLocation": "https://files.pythonhosted.org/packages/bb/63/f9e1ea081ce35720d8b92acde70daaedace594dc93b693c869e0d5910718/click-8.3.3.tar.gz",
+            "verifiedUsing": [
+                {
+                    "type": "Hash",
+                    "algorithm": "sha256",
+                    "hashValue": "398329ad4837b2ff7cbe1dd166a4c0f8900c3ca3a218de04466f38f6497f18a2"
+                },
+                {
+                    "type": "Hash",
+                    "algorithm": "md5",
+                    "hashValue": "7ac811bcb2bdd53ae85afe7e7f9224c2"
+                }
+            ],
+            "creationInfo": "_:creationInfo",
+            "software_copyrightText": "Copyright 2014 Pallets\ncopyright 2014 Pallets\nCopyright 2001-2006 Gregory P. Ward\nCopyright 2002-2006 Python Software Foundation\n"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/LicenseExpression-click",
+            "type": "simplelicensing_LicenseExpression",
+            "simplelicensing_licenseExpression": "BSD-3-Clause",
+            "simplelicensing_licenseListVersion": "3.28.0",
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/relationshipconcluded-click",
+            "type": "Relationship",
+            "relationshipType": "hasConcludedLicense",
+            "from": "https://spdx.org/spdxdocs/click",
+            "to": [
+                "https://spdx.org/spdxdocs/LicenseExpression-click"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/relationshipdeclared-click",
+            "type": "Relationship",
+            "relationshipType": "hasDeclaredLicense",
+            "from": "https://spdx.org/spdxdocs/click",
+            "to": [
+                "https://spdx.org/spdxdocs/LicenseExpression-click"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/idna",
+            "type": "software_Package",
+            "name": "idna",
+            "software_packageVersion": "3.13",
+            "suppliedBy": "https://spdx.org/spdxdocs/pypi",
+            "software_packageUrl": "pkg:pypi/idna@3.13",
+            "software_downloadLocation": "https://files.pythonhosted.org/packages/ce/cc/762dfb036166873f0059f3b7de4565e1b5bc3d6f28a414c13da27e442f99/idna-3.13.tar.gz",
+            "verifiedUsing": [
+                {
+                    "type": "Hash",
+                    "algorithm": "sha256",
+                    "hashValue": "585ea8fe5d69b9181ec1afba340451fba6ba764af97026f92a91d4eef164a242"
+                },
+                {
+                    "type": "Hash",
+                    "algorithm": "md5",
+                    "hashValue": "98ba54244976fa6cff886ae4e7075ccf"
+                }
+            ],
+            "creationInfo": "_:creationInfo",
+            "software_copyrightText": "Copyright (c) 2013-2026, Kim Davies and contributors\n"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/LicenseExpression-idna",
+            "type": "simplelicensing_LicenseExpression",
+            "simplelicensing_licenseExpression": "BSD-3-Clause",
+            "simplelicensing_licenseListVersion": "3.28.0",
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/relationshipconcluded-idna",
+            "type": "Relationship",
+            "relationshipType": "hasConcludedLicense",
+            "from": "https://spdx.org/spdxdocs/idna",
+            "to": [
+                "https://spdx.org/spdxdocs/LicenseExpression-idna"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/relationshipdeclared-idna",
+            "type": "Relationship",
+            "relationshipType": "hasDeclaredLicense",
+            "from": "https://spdx.org/spdxdocs/idna",
+            "to": [
+                "https://spdx.org/spdxdocs/LicenseExpression-idna"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/license-expression",
+            "type": "software_Package",
+            "name": "license-expression",
+            "software_packageVersion": "30.4.4",
+            "suppliedBy": "https://spdx.org/spdxdocs/pypi",
+            "software_packageUrl": "pkg:pypi/license-expression@30.4.4",
+            "software_downloadLocation": "https://files.pythonhosted.org/packages/40/71/d89bb0e71b1415453980fd32315f2a037aad9f7f70f695c7cec7035feb13/license_expression-30.4.4.tar.gz",
+            "verifiedUsing": [
+                {
+                    "type": "Hash",
+                    "algorithm": "sha256",
+                    "hashValue": "73448f0aacd8d0808895bdc4b2c8e01a8d67646e4188f887375398c761f340fd"
+                },
+                {
+                    "type": "Hash",
+                    "algorithm": "md5",
+                    "hashValue": "933c9e708aba564bec664357771709d7"
+                }
+            ],
+            "creationInfo": "_:creationInfo",
+            "software_copyrightText": "Copyright (c) nexB Inc.\nCopyright (c) Giovanni Bussi\nCopyright (c) 2019 Giovanni Bussi\nCopyright (c) nexB Inc. and others.\ncopyright nexB Inc., AboutCode and others\nCopyright (c) 2008-2020 The pip developers\nCopyright (c) nexB Inc. AboutCode, and others\ncopyright 2010 David Wolever <david@wolever.net>\nCopyright (c) 2010 David Wolever <david@wolever.net>\nCopyright (c) 2010 David Wolever . All rights reserved.\nCopyright (c) nexB Inc. and others. All rights reserved.\nCopyright (c) nexB Inc. AboutCode, and others. All rights reserved.\n"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/LicenseExpression-license-expression",
+            "type": "simplelicensing_LicenseExpression",
+            "simplelicensing_licenseExpression": "Apache-2.0",
+            "simplelicensing_licenseListVersion": "3.28.0",
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/relationshipconcluded-license-expression",
+            "type": "Relationship",
+            "relationshipType": "hasConcludedLicense",
+            "from": "https://spdx.org/spdxdocs/license-expression",
+            "to": [
+                "https://spdx.org/spdxdocs/LicenseExpression-license-expression"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/relationshipdeclared-license-expression",
+            "type": "Relationship",
+            "relationshipType": "hasDeclaredLicense",
+            "from": "https://spdx.org/spdxdocs/license-expression",
+            "to": [
+                "https://spdx.org/spdxdocs/LicenseExpression-license-expression"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/ply",
+            "type": "software_Package",
+            "name": "ply",
+            "software_packageVersion": "3.11",
+            "suppliedBy": "https://spdx.org/spdxdocs/pypi",
+            "software_packageUrl": "pkg:pypi/ply@3.11",
+            "software_downloadLocation": "https://files.pythonhosted.org/packages/e5/69/882ee5c9d017149285cab114ebeab373308ef0f874fcdac9beb90e0ac4da/ply-3.11.tar.gz",
+            "verifiedUsing": [
+                {
+                    "type": "Hash",
+                    "algorithm": "sha256",
+                    "hashValue": "00c7c1aaa88358b9c765b6d3000c6eec0ba42abca5351b095321aef446081da3"
+                },
+                {
+                    "type": "Hash",
+                    "algorithm": "md5",
+                    "hashValue": "6465f602e656455affcd7c5734c638f8"
+                }
+            ],
+            "creationInfo": "_:creationInfo",
+            "software_copyrightText": "Copyright (c) 2001-2018 David M. Beazley (Dabeaz LLC)\nDavid Beazley (http://www.dabeaz.com) Copyright (c) 2007\n"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/LicenseExpression-ply",
+            "type": "simplelicensing_LicenseExpression",
+            "simplelicensing_licenseExpression": "BSD-3-Clause",
+            "simplelicensing_licenseListVersion": "3.28.0",
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/relationshipconcluded-ply",
+            "type": "Relationship",
+            "relationshipType": "hasConcludedLicense",
+            "from": "https://spdx.org/spdxdocs/ply",
+            "to": [
+                "https://spdx.org/spdxdocs/LicenseExpression-ply"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/relationshipdeclared-ply",
+            "type": "Relationship",
+            "relationshipType": "hasDeclaredLicense",
+            "from": "https://spdx.org/spdxdocs/ply",
+            "to": [
+                "https://spdx.org/spdxdocs/LicenseExpression-ply"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/pyparsing",
+            "type": "software_Package",
+            "name": "pyparsing",
+            "software_packageVersion": "3.3.2",
+            "suppliedBy": "https://spdx.org/spdxdocs/pypi",
+            "software_packageUrl": "pkg:pypi/pyparsing@3.3.2",
+            "software_downloadLocation": "https://files.pythonhosted.org/packages/f3/91/9c6ee907786a473bf81c5f53cf703ba0957b23ab84c264080fb5a450416f/pyparsing-3.3.2.tar.gz",
+            "verifiedUsing": [
+                {
+                    "type": "Hash",
+                    "algorithm": "sha256",
+                    "hashValue": "c777f4d763f140633dcb6d8a3eda953bf7a214dc4eff598413c070bcdc117cbc"
+                },
+                {
+                    "type": "Hash",
+                    "algorithm": "md5",
+                    "hashValue": "ca3bea68cd1a84584b68cd7bed679464"
+                }
+            ],
+            "creationInfo": "_:creationInfo",
+            "software_copyrightText": "Copyright 2004, Paul McGuire\nCopyright 2006, Paul McGuire\nCopyright 2008 Chris Lambrou\nCopyright 2008, Paul McGuire\nCopyright 2010, Paul McGuire\nCopyright 2011, Paul McGuire\nCopyright 2015, Paul McGuire\nCopyright 2016, Paul McGuire\nCopyright 2018, Paul McGuire\nCopyright 2019, Paul McGuire\nCopyright 2020, Paul McGuire\nCopyright 2021, Paul McGuire\nCopyright 2023, Paul McGuire\nCopyright 2024, Paul McGuire\nCopyright Paul McGuire, 2019\nCopyright Paul McGuire, 2021\ncopyright 2006, Paul McGuire\nCopyright, 2010, Paul McGuire\nCopyright, 2007 - Paul McGuire\nCopyright, 2012 - Paul McGuire\nCopyright 2006, by Paul McGuire\nCopyright 2008, by Paul McGuire\nCopyright 2012, Paul T. McGuire\nCopyright 2022, by Paul McGuire\nCopyright 2024, by Paul McGuire\nCopyright (c) 2003, Paul McGuire\nCopyright (c) 2004, Paul McGuire\nCopyright (c) 2006, Paul McGuire\nCopyright (c) 2016, Paul McGuire\nCopyright (c) 2024, Paul McGuire\nCopyright 2010,2019 Paul McGuire\nCopyright, 2006, by Paul McGuire\nCopyright 2002-2021, Paul McGuire\nCopyright 2005-2006, Paul McGuire\nCopyright 2009, 2011 Paul McGuire\nCopyright (c) 2018 Paul T. McGuire\nCopyright Ellis & Grant, Inc. 2005\nCopyright 2003-2019 by Paul McGuire\nCopyright 2011,2015 Paul T. McGuire\nCopyright (c) 2003,2019 Paul McGuire\nCopyright (c) 2003-2024 Paul McGuire\nCopyright (c) 2003-2025 Paul McGuire\nCopyright (c) 2006,2016 Paul McGuire\nCopyright 2003, 2019 by Paul McGuire\nCopyright 2004-2016, by Paul McGuire\nCopyright 2007, 2023 by Paul McGuire\nCopyright 2007-2011, by Paul McGuire\nCopyright 2010, 2019 by Paul McGuire\nCopyright 2012, 2019 Paul T. McGuire\ncopyright 2018-2024, Paul T. McGuire\nCopyright (c) 2003,2016, Paul McGuire\nCopyright (c) 2004, 2006 Paul McGuire\nCopyright (c) 2004-2016, Paul McGuire\nCopyright (c) 2006, 2019, Paul McGuire\nCopyright (c) 2003-2022 Paul T. McGuire\nCopyright (c) 2004-2011 Paul T. McGuire\nCopyright (c) 2006, 2016, 2023, Paul McGuire\nCopyright (c) 2006, Estrate, the Netherlands\nCopyright 1989 by Carnegie Mellon University\nCopyright 2004-2010, by Paul McGuire September, 2010\nCopyright Petri Savolainen <firstname.lastname@iki.fi>\nCopyright 2004, by Alberto Santini http://www.albertosantini.it/chess\n"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/LicenseExpression-pyparsing",
+            "type": "simplelicensing_LicenseExpression",
+            "simplelicensing_licenseExpression": "MIT",
+            "simplelicensing_licenseListVersion": "3.28.0",
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/relationshipconcluded-pyparsing",
+            "type": "Relationship",
+            "relationshipType": "hasConcludedLicense",
+            "from": "https://spdx.org/spdxdocs/pyparsing",
+            "to": [
+                "https://spdx.org/spdxdocs/LicenseExpression-pyparsing"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/relationshipdeclared-pyparsing",
+            "type": "Relationship",
+            "relationshipType": "hasDeclaredLicense",
+            "from": "https://spdx.org/spdxdocs/pyparsing",
+            "to": [
+                "https://spdx.org/spdxdocs/LicenseExpression-pyparsing"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/pyyaml",
+            "type": "software_Package",
+            "name": "pyyaml",
+            "software_packageVersion": "6.0.3",
+            "suppliedBy": "https://spdx.org/spdxdocs/pypi",
+            "software_packageUrl": "pkg:pypi/pyyaml@6.0.3",
+            "software_downloadLocation": "https://files.pythonhosted.org/packages/05/8e/961c0007c59b8dd7729d542c61a4d537767a59645b82a0b521206e1e25c2/pyyaml-6.0.3.tar.gz",
+            "verifiedUsing": [
+                {
+                    "type": "Hash",
+                    "algorithm": "sha256",
+                    "hashValue": "d76623373421df22fb4cf8817020cbb7ef15c725b9d5e45f17e189bfc384190f"
+                },
+                {
+                    "type": "Hash",
+                    "algorithm": "md5",
+                    "hashValue": "dbc6f815cd75160ccf12e470be1c8d6e"
+                }
+            ],
+            "creationInfo": "_:creationInfo",
+            "software_copyrightText": "Copyright (c) 2017-2021 Ingy\nCopyright (c) 2006-2016 Kirill Simonov\n"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/LicenseExpression-pyyaml",
+            "type": "simplelicensing_LicenseExpression",
+            "simplelicensing_licenseExpression": "MIT",
+            "simplelicensing_licenseListVersion": "3.28.0",
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/relationshipconcluded-pyyaml",
+            "type": "Relationship",
+            "relationshipType": "hasConcludedLicense",
+            "from": "https://spdx.org/spdxdocs/pyyaml",
+            "to": [
+                "https://spdx.org/spdxdocs/LicenseExpression-pyyaml"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/relationshipdeclared-pyyaml",
+            "type": "Relationship",
+            "relationshipType": "hasDeclaredLicense",
+            "from": "https://spdx.org/spdxdocs/pyyaml",
+            "to": [
+                "https://spdx.org/spdxdocs/LicenseExpression-pyyaml"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/rdflib",
+            "type": "software_Package",
+            "name": "rdflib",
+            "software_packageVersion": "7.6.0",
+            "suppliedBy": "https://spdx.org/spdxdocs/pypi",
+            "software_packageUrl": "pkg:pypi/rdflib@7.6.0",
+            "software_downloadLocation": "https://files.pythonhosted.org/packages/98/f5/18bb77b7af9526add0c727a3b2048959847dc5fb030913e2918bf384fec3/rdflib-7.6.0.tar.gz",
+            "verifiedUsing": [
+                {
+                    "type": "Hash",
+                    "algorithm": "sha256",
+                    "hashValue": "6c831288d5e4a5a7ece85d0ccde9877d512a3d0f02d7c06455d00d6d0ea379df"
+                },
+                {
+                    "type": "Hash",
+                    "algorithm": "md5",
+                    "hashValue": "11bd8e278d1c1e5628ace31a7db904a4"
+                }
+            ],
+            "creationInfo": "_:creationInfo",
+            "software_copyrightText": "NOASSERTION"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/LicenseExpression-rdflib",
+            "type": "simplelicensing_LicenseExpression",
+            "simplelicensing_licenseExpression": "BSD-3-Clause",
+            "simplelicensing_licenseListVersion": "3.28.0",
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/relationshipconcluded-rdflib",
+            "type": "Relationship",
+            "relationshipType": "hasConcludedLicense",
+            "from": "https://spdx.org/spdxdocs/rdflib",
+            "to": [
+                "https://spdx.org/spdxdocs/LicenseExpression-rdflib"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/relationshipdeclared-rdflib",
+            "type": "Relationship",
+            "relationshipType": "hasDeclaredLicense",
+            "from": "https://spdx.org/spdxdocs/rdflib",
+            "to": [
+                "https://spdx.org/spdxdocs/LicenseExpression-rdflib"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/requests",
+            "type": "software_Package",
+            "name": "requests",
+            "software_packageVersion": "2.33.1",
+            "suppliedBy": "https://spdx.org/spdxdocs/pypi",
+            "software_packageUrl": "pkg:pypi/requests@2.33.1",
+            "software_downloadLocation": "https://files.pythonhosted.org/packages/5f/a4/98b9c7c6428a668bf7e42ebb7c79d576a1c3c1e3ae2d47e674b468388871/requests-2.33.1.tar.gz",
+            "verifiedUsing": [
+                {
+                    "type": "Hash",
+                    "algorithm": "sha256",
+                    "hashValue": "18817f8c57c6263968bc123d237e3b8b08ac046f5456bd1e307ee8f4250d3517"
+                },
+                {
+                    "type": "Hash",
+                    "algorithm": "md5",
+                    "hashValue": "ebc3b42b51c6245524345d170e5d4c50"
+                }
+            ],
+            "creationInfo": "_:creationInfo",
+            "software_copyrightText": "Copyright Kenneth Reitz\nCopyright 2019 Kenneth Reitz\ncopyright (c) 2012 by Kenneth Reitz\ncopyright (c) 2017 by Kenneth Reitz\n"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/LicenseExpression-requests",
+            "type": "simplelicensing_LicenseExpression",
+            "simplelicensing_licenseExpression": "Apache-2.0",
+            "simplelicensing_licenseListVersion": "3.28.0",
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/relationshipconcluded-requests",
+            "type": "Relationship",
+            "relationshipType": "hasConcludedLicense",
+            "from": "https://spdx.org/spdxdocs/requests",
+            "to": [
+                "https://spdx.org/spdxdocs/LicenseExpression-requests"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/relationshipdeclared-requests",
+            "type": "Relationship",
+            "relationshipType": "hasDeclaredLicense",
+            "from": "https://spdx.org/spdxdocs/requests",
+            "to": [
+                "https://spdx.org/spdxdocs/LicenseExpression-requests"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/semantic-version",
+            "type": "software_Package",
+            "name": "semantic-version",
+            "software_packageVersion": "2.10.0",
+            "suppliedBy": "https://spdx.org/spdxdocs/pypi",
+            "software_packageUrl": "pkg:pypi/semantic-version@2.10.0",
+            "software_downloadLocation": "https://files.pythonhosted.org/packages/7d/31/f2289ce78b9b473d582568c234e104d2a342fd658cc288a7553d83bb8595/semantic_version-2.10.0.tar.gz",
+            "verifiedUsing": [
+                {
+                    "type": "Hash",
+                    "algorithm": "sha256",
+                    "hashValue": "bdabb6d336998cbb378d4b9db3a4b56a1e3235701dc05ea2690d9a997ed5041c"
+                },
+                {
+                    "type": "Hash",
+                    "algorithm": "md5",
+                    "hashValue": "e48abef93ba69abcd4eaf4640edfc38b"
+                }
+            ],
+            "creationInfo": "_:creationInfo",
+            "software_copyrightText": "Copyright (c) The python-semanticversion project\ncopyright u'2012-2019, The python-semanticversion project\n"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/LicenseExpression-semantic-version",
+            "type": "simplelicensing_LicenseExpression",
+            "simplelicensing_licenseExpression": "BSD-2-Clause",
+            "simplelicensing_licenseListVersion": "3.28.0",
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/relationshipconcluded-semantic-version",
+            "type": "Relationship",
+            "relationshipType": "hasConcludedLicense",
+            "from": "https://spdx.org/spdxdocs/semantic-version",
+            "to": [
+                "https://spdx.org/spdxdocs/LicenseExpression-semantic-version"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/relationshipdeclared-semantic-version",
+            "type": "Relationship",
+            "relationshipType": "hasDeclaredLicense",
+            "from": "https://spdx.org/spdxdocs/semantic-version",
+            "to": [
+                "https://spdx.org/spdxdocs/LicenseExpression-semantic-version"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/spdx-license-list",
+            "type": "software_Package",
+            "name": "spdx-license-list",
+            "software_packageVersion": "3.28.0",
+            "suppliedBy": "https://spdx.org/spdxdocs/pypi",
+            "software_packageUrl": "pkg:pypi/spdx-license-list@3.28.0",
+            "software_downloadLocation": "https://files.pythonhosted.org/packages/df/a7/a8c001c3e904c1fda2d7b0a0e25db8a17a3b4612a90e1c8c9fd62c417c97/spdx_license_list-3.28.0.tar.gz",
+            "verifiedUsing": [
+                {
+                    "type": "Hash",
+                    "algorithm": "sha256",
+                    "hashValue": "7b7c163d4a92a5f044281692784d287b12ca36d2e9caf6e39f40b1a1e1003fce"
+                },
+                {
+                    "type": "Hash",
+                    "algorithm": "md5",
+                    "hashValue": "acdc6a3c0431a87f26685ec007945865"
+                }
+            ],
+            "creationInfo": "_:creationInfo",
+            "software_copyrightText": "Copyright (c) 2022 JJMC89\n"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/LicenseExpression-spdx-license-list",
+            "type": "simplelicensing_LicenseExpression",
+            "simplelicensing_licenseExpression": "MIT",
+            "simplelicensing_licenseListVersion": "3.28.0",
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/relationshipconcluded-spdx-license-list",
+            "type": "Relationship",
+            "relationshipType": "hasConcludedLicense",
+            "from": "https://spdx.org/spdxdocs/spdx-license-list",
+            "to": [
+                "https://spdx.org/spdxdocs/LicenseExpression-spdx-license-list"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/relationshipdeclared-spdx-license-list",
+            "type": "Relationship",
+            "relationshipType": "hasDeclaredLicense",
+            "from": "https://spdx.org/spdxdocs/spdx-license-list",
+            "to": [
+                "https://spdx.org/spdxdocs/LicenseExpression-spdx-license-list"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/spdx-tools",
+            "type": "software_Package",
+            "name": "spdx-tools",
+            "software_packageVersion": "0.8.5",
+            "suppliedBy": "https://spdx.org/spdxdocs/pypi",
+            "software_packageUrl": "pkg:pypi/spdx-tools@0.8.5",
+            "software_downloadLocation": "https://files.pythonhosted.org/packages/2f/99/33383f587b59cbd191cc1c0fd5408e550b9275e0090d32561cbddc973fdc/spdx_tools-0.8.5.tar.gz",
+            "verifiedUsing": [
+                {
+                    "type": "Hash",
+                    "algorithm": "sha256",
+                    "hashValue": "be600beb2f762f0116025e05490d399e724f668bef84025a7c421bb266688bdb"
+                },
+                {
+                    "type": "Hash",
+                    "algorithm": "md5",
+                    "hashValue": "1f57f1eb5bdbc42d3de855d3f2701dfe"
+                }
+            ],
+            "creationInfo": "_:creationInfo",
+            "software_copyrightText": "NOASSERTION"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/LicenseExpression-spdx-tools",
+            "type": "simplelicensing_LicenseExpression",
+            "simplelicensing_licenseExpression": "Apache-2.0",
+            "simplelicensing_licenseListVersion": "3.28.0",
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/relationshipconcluded-spdx-tools",
+            "type": "Relationship",
+            "relationshipType": "hasConcludedLicense",
+            "from": "https://spdx.org/spdxdocs/spdx-tools",
+            "to": [
+                "https://spdx.org/spdxdocs/LicenseExpression-spdx-tools"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/relationshipdeclared-spdx-tools",
+            "type": "Relationship",
+            "relationshipType": "hasDeclaredLicense",
+            "from": "https://spdx.org/spdxdocs/spdx-tools",
+            "to": [
+                "https://spdx.org/spdxdocs/LicenseExpression-spdx-tools"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/uritools",
+            "type": "software_Package",
+            "name": "uritools",
+            "software_packageVersion": "6.1.0",
+            "suppliedBy": "https://spdx.org/spdxdocs/pypi",
+            "software_packageUrl": "pkg:pypi/uritools@6.1.0",
+            "software_downloadLocation": "https://files.pythonhosted.org/packages/8a/97/508fa009ddc9c0d0e6e687eca0e3aa6ff09ac9836f98c28958a7eed936c1/uritools-6.1.0.tar.gz",
+            "verifiedUsing": [
+                {
+                    "type": "Hash",
+                    "algorithm": "sha256",
+                    "hashValue": "be97e452528e7a42ef0a4df68364ddd77833e982c5bac5cdcfee15c81f65e96b"
+                },
+                {
+                    "type": "Hash",
+                    "algorithm": "md5",
+                    "hashValue": "26240a574ea4c6f9f3b038dec724120a"
+                }
+            ],
+            "creationInfo": "_:creationInfo",
+            "software_copyrightText": "NOASSERTION"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/LicenseExpression-uritools",
+            "type": "simplelicensing_LicenseExpression",
+            "simplelicensing_licenseExpression": "MIT",
+            "simplelicensing_licenseListVersion": "3.28.0",
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/relationshipconcluded-uritools",
+            "type": "Relationship",
+            "relationshipType": "hasConcludedLicense",
+            "from": "https://spdx.org/spdxdocs/uritools",
+            "to": [
+                "https://spdx.org/spdxdocs/LicenseExpression-uritools"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/relationshipdeclared-uritools",
+            "type": "Relationship",
+            "relationshipType": "hasDeclaredLicense",
+            "from": "https://spdx.org/spdxdocs/uritools",
+            "to": [
+                "https://spdx.org/spdxdocs/LicenseExpression-uritools"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/urllib3",
+            "type": "software_Package",
+            "name": "urllib3",
+            "software_packageVersion": "2.6.3",
+            "suppliedBy": "https://spdx.org/spdxdocs/pypi",
+            "software_packageUrl": "pkg:pypi/urllib3@2.6.3",
+            "software_downloadLocation": "https://files.pythonhosted.org/packages/c7/24/5f1b3bdffd70275f6661c76461e25f024d5a38a46f04aaca912426a2b1d3/urllib3-2.6.3.tar.gz",
+            "verifiedUsing": [
+                {
+                    "type": "Hash",
+                    "algorithm": "sha256",
+                    "hashValue": "1b62b6884944a57dbe321509ab94fd4d3b307075e0c2eae991ac71ee15ad38ed"
+                },
+                {
+                    "type": "Hash",
+                    "algorithm": "md5",
+                    "hashValue": "2c381874816fe551f50a2551abae62b3"
+                }
+            ],
+            "creationInfo": "_:creationInfo",
+            "software_copyrightText": "Copyright 2019-2022, Pyodide contributors\n2019-2022 Pyodide contributors and Mozilla\nCopyright (c) 2019-2022, Pyodide contributors\nCopyright (c) 2008-2020 Andrey Petrov and contributors\n"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/LicenseExpression-urllib3",
+            "type": "simplelicensing_LicenseExpression",
+            "simplelicensing_licenseExpression": "MIT",
+            "simplelicensing_licenseListVersion": "3.28.0",
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/relationshipconcluded-urllib3",
+            "type": "Relationship",
+            "relationshipType": "hasConcludedLicense",
+            "from": "https://spdx.org/spdxdocs/urllib3",
+            "to": [
+                "https://spdx.org/spdxdocs/LicenseExpression-urllib3"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/relationshipdeclared-urllib3",
+            "type": "Relationship",
+            "relationshipType": "hasDeclaredLicense",
+            "from": "https://spdx.org/spdxdocs/urllib3",
+            "to": [
+                "https://spdx.org/spdxdocs/LicenseExpression-urllib3"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/xmltodict",
+            "type": "software_Package",
+            "name": "xmltodict",
+            "software_packageVersion": "1.0.4",
+            "suppliedBy": "https://spdx.org/spdxdocs/pypi",
+            "software_packageUrl": "pkg:pypi/xmltodict@1.0.4",
+            "software_downloadLocation": "https://files.pythonhosted.org/packages/19/70/80f3b7c10d2630aa66414bf23d210386700aa390547278c789afa994fd7e/xmltodict-1.0.4.tar.gz",
+            "verifiedUsing": [
+                {
+                    "type": "Hash",
+                    "algorithm": "sha256",
+                    "hashValue": "6d94c9f834dd9e44514162799d344d815a3a4faec913717a9ecbfa5be1bb8e61"
+                },
+                {
+                    "type": "Hash",
+                    "algorithm": "md5",
+                    "hashValue": "f0a83032fc31c918a8cd9e60cdb46cb1"
+                }
+            ],
+            "creationInfo": "_:creationInfo",
+            "software_copyrightText": "Copyright (c) 2012 Martin Blech and individual contributors\n"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/LicenseExpression-xmltodict",
+            "type": "simplelicensing_LicenseExpression",
+            "simplelicensing_licenseExpression": "MIT",
+            "simplelicensing_licenseListVersion": "3.28.0",
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/relationshipconcluded-xmltodict",
+            "type": "Relationship",
+            "relationshipType": "hasConcludedLicense",
+            "from": "https://spdx.org/spdxdocs/xmltodict",
+            "to": [
+                "https://spdx.org/spdxdocs/LicenseExpression-xmltodict"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/relationshipdeclared-xmltodict",
+            "type": "Relationship",
+            "relationshipType": "hasDeclaredLicense",
+            "from": "https://spdx.org/spdxdocs/xmltodict",
+            "to": [
+                "https://spdx.org/spdxdocs/LicenseExpression-xmltodict"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://spdx.org/spdxdocs/CC0-1.0",
+            "type": "simplelicensing_LicenseExpression",
+            "simplelicensing_licenseExpression": "CC0-1.0",
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://pypi.org/describes",
+            "type": "Relationship",
+            "relationshipType": "describes",
+            "from": "https://spdx.org/spdxdocs/spdxdocument",
+            "to": [
+                "https://spdx.org/spdxdocs/pypispdx"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://pypi.org/contains-beartype",
+            "type": "Relationship",
+            "relationshipType": "contains",
+            "from": "https://spdx.org/spdxdocs/pypispdx",
+            "to": [
+                "https://spdx.org/spdxdocs/beartype"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://pypi.org/contains-boolean-py",
+            "type": "Relationship",
+            "relationshipType": "contains",
+            "from": "https://spdx.org/spdxdocs/pypispdx",
+            "to": [
+                "https://spdx.org/spdxdocs/boolean-py"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://pypi.org/contains-certifi",
+            "type": "Relationship",
+            "relationshipType": "contains",
+            "from": "https://spdx.org/spdxdocs/pypispdx",
+            "to": [
+                "https://spdx.org/spdxdocs/certifi"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://pypi.org/contains-charset-normalizer",
+            "type": "Relationship",
+            "relationshipType": "contains",
+            "from": "https://spdx.org/spdxdocs/pypispdx",
+            "to": [
+                "https://spdx.org/spdxdocs/charset-normalizer"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://pypi.org/contains-click",
+            "type": "Relationship",
+            "relationshipType": "contains",
+            "from": "https://spdx.org/spdxdocs/pypispdx",
+            "to": [
+                "https://spdx.org/spdxdocs/click"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://pypi.org/contains-idna",
+            "type": "Relationship",
+            "relationshipType": "contains",
+            "from": "https://spdx.org/spdxdocs/pypispdx",
+            "to": [
+                "https://spdx.org/spdxdocs/idna"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://pypi.org/contains-license-expression",
+            "type": "Relationship",
+            "relationshipType": "contains",
+            "from": "https://spdx.org/spdxdocs/pypispdx",
+            "to": [
+                "https://spdx.org/spdxdocs/license-expression"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://pypi.org/contains-ply",
+            "type": "Relationship",
+            "relationshipType": "contains",
+            "from": "https://spdx.org/spdxdocs/pypispdx",
+            "to": [
+                "https://spdx.org/spdxdocs/ply"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://pypi.org/contains-pyparsing",
+            "type": "Relationship",
+            "relationshipType": "contains",
+            "from": "https://spdx.org/spdxdocs/pypispdx",
+            "to": [
+                "https://spdx.org/spdxdocs/pyparsing"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://pypi.org/contains-pyyaml",
+            "type": "Relationship",
+            "relationshipType": "contains",
+            "from": "https://spdx.org/spdxdocs/pypispdx",
+            "to": [
+                "https://spdx.org/spdxdocs/pyyaml"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://pypi.org/contains-rdflib",
+            "type": "Relationship",
+            "relationshipType": "contains",
+            "from": "https://spdx.org/spdxdocs/pypispdx",
+            "to": [
+                "https://spdx.org/spdxdocs/rdflib"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://pypi.org/contains-requests",
+            "type": "Relationship",
+            "relationshipType": "contains",
+            "from": "https://spdx.org/spdxdocs/pypispdx",
+            "to": [
+                "https://spdx.org/spdxdocs/requests"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://pypi.org/contains-semantic-version",
+            "type": "Relationship",
+            "relationshipType": "contains",
+            "from": "https://spdx.org/spdxdocs/pypispdx",
+            "to": [
+                "https://spdx.org/spdxdocs/semantic-version"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://pypi.org/contains-spdx-license-list",
+            "type": "Relationship",
+            "relationshipType": "contains",
+            "from": "https://spdx.org/spdxdocs/pypispdx",
+            "to": [
+                "https://spdx.org/spdxdocs/spdx-license-list"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://pypi.org/contains-spdx-tools",
+            "type": "Relationship",
+            "relationshipType": "contains",
+            "from": "https://spdx.org/spdxdocs/pypispdx",
+            "to": [
+                "https://spdx.org/spdxdocs/spdx-tools"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://pypi.org/contains-uritools",
+            "type": "Relationship",
+            "relationshipType": "contains",
+            "from": "https://spdx.org/spdxdocs/pypispdx",
+            "to": [
+                "https://spdx.org/spdxdocs/uritools"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://pypi.org/contains-urllib3",
+            "type": "Relationship",
+            "relationshipType": "contains",
+            "from": "https://spdx.org/spdxdocs/pypispdx",
+            "to": [
+                "https://spdx.org/spdxdocs/urllib3"
+            ],
+            "creationInfo": "_:creationInfo"
+        },
+        {
+            "spdxId": "https://pypi.org/contains-xmltodict",
+            "type": "Relationship",
+            "relationshipType": "contains",
+            "from": "https://spdx.org/spdxdocs/pypispdx",
+            "to": [
+                "https://spdx.org/spdxdocs/xmltodict"
+            ],
+            "creationInfo": "_:creationInfo"
+        }
+    ]
+}
