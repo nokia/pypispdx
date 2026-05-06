@@ -1,0 +1,647 @@
+{
+    "SPDXID": "SPDXRef-DOCUMENT",
+    "creationInfo": {
+        "created": "2026-05-06T17:14:34Z",
+        "creators": [
+            "Organization: Nokia",
+            "Tool: pypispdx - 0.3.1"
+        ],
+        "licenseListVersion": "3.28",
+        "comment": "CISA SBOM type: Analyzed\nThis SBOM was created with Python version 3.14.4"
+    },
+    "dataLicense": "CC0-1.0",
+    "name": "pypispdx-0.3.1",
+    "spdxVersion": "SPDX-2.3",
+    "documentNamespace": "https://pypi.org/spdx/pypispdx-0.3.1",
+    "packages": [
+        {
+            "SPDXID": "SPDXRef-pypispdx",
+            "checksums": [
+                {
+                    "algorithm": "SHA256",
+                    "checksumValue": "be1f3c9405417df522ba316250fb543127c557cb7bd0bbd97facbf8d1d8126f8"
+                },
+                {
+                    "algorithm": "MD5",
+                    "checksumValue": "00b95420aec6b616a2ad3767fe622d16"
+                }
+            ],
+            "copyrightText": "NOASSERTION",
+            "downloadLocation": "https://files.pythonhosted.org/packages/37/a6/731178dd333ecfffc77d7ec1e11c1c1239178c203e3a02ee864860e258dc/pypispdx-0.3.1.tar.gz",
+            "externalRefs": [
+                {
+                    "referenceCategory": "PACKAGE_MANAGER",
+                    "referenceLocator": "pkg:pypi/pypispdx@0.3.1",
+                    "referenceType": "purl"
+                }
+            ],
+            "filesAnalyzed": false,
+            "licenseConcluded": "Apache-2.0",
+            "licenseDeclared": "Apache-2.0",
+            "name": "pypispdx",
+            "supplier": "Organization: https://pypi.org",
+            "versionInfo": "0.3.1"
+        },
+        {
+            "SPDXID": "SPDXRef-beartype",
+            "checksums": [
+                {
+                    "algorithm": "SHA256",
+                    "checksumValue": "8f82b54aa723a2848a56008d18875f91c1db02c32ef6a62319a002e3e25a975f"
+                },
+                {
+                    "algorithm": "MD5",
+                    "checksumValue": "da867f7418a7e35ae5b8495b505000f0"
+                }
+            ],
+            "copyrightText": "copyright 2021, @leycec\nCopyright (c) 2014-2025 Beartype\nCOPYRIGHT 2014-2025 Beartype authors\n",
+            "downloadLocation": "https://files.pythonhosted.org/packages/c7/94/1009e248bbfbab11397abca7193bea6626806be9a327d399810d523a07cb/beartype-0.22.9.tar.gz",
+            "externalRefs": [
+                {
+                    "referenceCategory": "PACKAGE_MANAGER",
+                    "referenceLocator": "pkg:pypi/beartype@0.22.9",
+                    "referenceType": "purl"
+                }
+            ],
+            "filesAnalyzed": false,
+            "licenseConcluded": "MIT",
+            "licenseDeclared": "MIT",
+            "name": "beartype",
+            "supplier": "Organization: https://pypi.org",
+            "versionInfo": "0.22.9"
+        },
+        {
+            "SPDXID": "SPDXRef-boolean-py",
+            "checksums": [
+                {
+                    "algorithm": "SHA256",
+                    "checksumValue": "60cbc4bad079753721d32649545505362c754e121570ada4658b852a3a318d95"
+                },
+                {
+                    "algorithm": "MD5",
+                    "checksumValue": "1a7ec75805094c91980b9f11240853c0"
+                }
+            ],
+            "copyrightText": "copyright 2009, Sebastian Kramer\nCopyright (c) 2009, 2010, 2013-2016 by the Brotli Authors\nCopyright (c) Sebastian Kraemer, basti.kr@gmail.com and others\nCopyright (c) 2009-2020 Sebastian Kraemer, basti.kr@gmail.com and others\n",
+            "downloadLocation": "https://files.pythonhosted.org/packages/c4/cf/85379f13b76f3a69bca86b60237978af17d6aa0bc5998978c3b8cf05abb2/boolean_py-5.0.tar.gz",
+            "externalRefs": [
+                {
+                    "referenceCategory": "PACKAGE_MANAGER",
+                    "referenceLocator": "pkg:pypi/boolean-py@5.0",
+                    "referenceType": "purl"
+                }
+            ],
+            "filesAnalyzed": false,
+            "licenseConcluded": "BSD-2-Clause",
+            "licenseDeclared": "BSD-2-Clause",
+            "name": "boolean-py",
+            "supplier": "Organization: https://pypi.org",
+            "versionInfo": "5.0"
+        },
+        {
+            "SPDXID": "SPDXRef-certifi",
+            "checksums": [
+                {
+                    "algorithm": "SHA256",
+                    "checksumValue": "8d455352a37b71bf76a79caa83a3d6c25afee4a385d632127b6afb3963f1c580"
+                },
+                {
+                    "algorithm": "MD5",
+                    "checksumValue": "238385f505d22767cd1860661f1c5743"
+                }
+            ],
+            "copyrightText": "NOASSERTION",
+            "downloadLocation": "https://files.pythonhosted.org/packages/25/ee/6caf7a40c36a1220410afe15a1cc64993a1f864871f698c0f93acb72842a/certifi-2026.4.22.tar.gz",
+            "externalRefs": [
+                {
+                    "referenceCategory": "PACKAGE_MANAGER",
+                    "referenceLocator": "pkg:pypi/certifi@2026.4.22",
+                    "referenceType": "purl"
+                }
+            ],
+            "filesAnalyzed": false,
+            "licenseConcluded": "MPL-2.0",
+            "licenseDeclared": "MPL-2.0",
+            "name": "certifi",
+            "supplier": "Organization: https://pypi.org",
+            "versionInfo": "2026.4.22"
+        },
+        {
+            "SPDXID": "SPDXRef-charset-normalizer",
+            "checksums": [
+                {
+                    "algorithm": "SHA256",
+                    "checksumValue": "ae89db9e5f98a11a4bf50407d4363e7b09b31e55bc117b4f7d80aab97ba009e5"
+                },
+                {
+                    "algorithm": "MD5",
+                    "checksumValue": "68805886064d248d2e5205fd11112d85"
+                }
+            ],
+            "copyrightText": "COPYRIGHT (c) FOOBAR\ncopyright 2023, Ahmed TAHRI\nCopyright (c) 2025 Ahmed TAHRI\nCopyright (c) 2025 TAHRI Ahmed R.\ncopyright (c) 2021 by Ahmed TAHRI\n(c) 2012 Denny Vrandecic (http://simia.net/letters/)\nCopyright (c) Ahmed TAHRI @Ousret (https://github.com/Ousret)\n",
+            "downloadLocation": "https://files.pythonhosted.org/packages/e7/a1/67fe25fac3c7642725500a3f6cfe5821ad557c3abb11c9d20d12c7008d3e/charset_normalizer-3.4.7.tar.gz",
+            "externalRefs": [
+                {
+                    "referenceCategory": "PACKAGE_MANAGER",
+                    "referenceLocator": "pkg:pypi/charset-normalizer@3.4.7",
+                    "referenceType": "purl"
+                }
+            ],
+            "filesAnalyzed": false,
+            "licenseConcluded": "MIT",
+            "licenseDeclared": "MIT",
+            "name": "charset-normalizer",
+            "supplier": "Organization: https://pypi.org",
+            "versionInfo": "3.4.7"
+        },
+        {
+            "SPDXID": "SPDXRef-click",
+            "checksums": [
+                {
+                    "algorithm": "SHA256",
+                    "checksumValue": "398329ad4837b2ff7cbe1dd166a4c0f8900c3ca3a218de04466f38f6497f18a2"
+                },
+                {
+                    "algorithm": "MD5",
+                    "checksumValue": "7ac811bcb2bdd53ae85afe7e7f9224c2"
+                }
+            ],
+            "copyrightText": "Copyright 2014 Pallets\ncopyright 2014 Pallets\nCopyright 2001-2006 Gregory P. Ward\nCopyright 2002-2006 Python Software Foundation\n",
+            "downloadLocation": "https://files.pythonhosted.org/packages/bb/63/f9e1ea081ce35720d8b92acde70daaedace594dc93b693c869e0d5910718/click-8.3.3.tar.gz",
+            "externalRefs": [
+                {
+                    "referenceCategory": "PACKAGE_MANAGER",
+                    "referenceLocator": "pkg:pypi/click@8.3.3",
+                    "referenceType": "purl"
+                }
+            ],
+            "filesAnalyzed": false,
+            "licenseConcluded": "BSD-3-Clause",
+            "licenseDeclared": "BSD-3-Clause",
+            "name": "click",
+            "supplier": "Organization: https://pypi.org",
+            "versionInfo": "8.3.3"
+        },
+        {
+            "SPDXID": "SPDXRef-idna",
+            "checksums": [
+                {
+                    "algorithm": "SHA256",
+                    "checksumValue": "585ea8fe5d69b9181ec1afba340451fba6ba764af97026f92a91d4eef164a242"
+                },
+                {
+                    "algorithm": "MD5",
+                    "checksumValue": "98ba54244976fa6cff886ae4e7075ccf"
+                }
+            ],
+            "copyrightText": "Copyright (c) 2013-2026, Kim Davies and contributors\n",
+            "downloadLocation": "https://files.pythonhosted.org/packages/ce/cc/762dfb036166873f0059f3b7de4565e1b5bc3d6f28a414c13da27e442f99/idna-3.13.tar.gz",
+            "externalRefs": [
+                {
+                    "referenceCategory": "PACKAGE_MANAGER",
+                    "referenceLocator": "pkg:pypi/idna@3.13",
+                    "referenceType": "purl"
+                }
+            ],
+            "filesAnalyzed": false,
+            "licenseConcluded": "BSD-3-Clause",
+            "licenseDeclared": "BSD-3-Clause",
+            "name": "idna",
+            "supplier": "Organization: https://pypi.org",
+            "versionInfo": "3.13"
+        },
+        {
+            "SPDXID": "SPDXRef-license-expression",
+            "checksums": [
+                {
+                    "algorithm": "SHA256",
+                    "checksumValue": "73448f0aacd8d0808895bdc4b2c8e01a8d67646e4188f887375398c761f340fd"
+                },
+                {
+                    "algorithm": "MD5",
+                    "checksumValue": "933c9e708aba564bec664357771709d7"
+                }
+            ],
+            "copyrightText": "Copyright (c) nexB Inc.\nCopyright (c) Giovanni Bussi\nCopyright (c) 2019 Giovanni Bussi\nCopyright (c) nexB Inc. and others.\ncopyright nexB Inc., AboutCode and others\nCopyright (c) 2008-2020 The pip developers\nCopyright (c) nexB Inc. AboutCode, and others\ncopyright 2010 David Wolever <david@wolever.net>\nCopyright (c) 2010 David Wolever <david@wolever.net>\nCopyright (c) 2010 David Wolever . All rights reserved.\nCopyright (c) nexB Inc. and others. All rights reserved.\nCopyright (c) nexB Inc. AboutCode, and others. All rights reserved.\n",
+            "downloadLocation": "https://files.pythonhosted.org/packages/40/71/d89bb0e71b1415453980fd32315f2a037aad9f7f70f695c7cec7035feb13/license_expression-30.4.4.tar.gz",
+            "externalRefs": [
+                {
+                    "referenceCategory": "PACKAGE_MANAGER",
+                    "referenceLocator": "pkg:pypi/license-expression@30.4.4",
+                    "referenceType": "purl"
+                }
+            ],
+            "filesAnalyzed": false,
+            "licenseConcluded": "Apache-2.0",
+            "licenseDeclared": "Apache-2.0",
+            "name": "license-expression",
+            "supplier": "Organization: https://pypi.org",
+            "versionInfo": "30.4.4"
+        },
+        {
+            "SPDXID": "SPDXRef-ply",
+            "checksums": [
+                {
+                    "algorithm": "SHA256",
+                    "checksumValue": "00c7c1aaa88358b9c765b6d3000c6eec0ba42abca5351b095321aef446081da3"
+                },
+                {
+                    "algorithm": "MD5",
+                    "checksumValue": "6465f602e656455affcd7c5734c638f8"
+                }
+            ],
+            "copyrightText": "Copyright (c) 2001-2018 David M. Beazley (Dabeaz LLC)\nDavid Beazley (http://www.dabeaz.com) Copyright (c) 2007\n",
+            "downloadLocation": "https://files.pythonhosted.org/packages/e5/69/882ee5c9d017149285cab114ebeab373308ef0f874fcdac9beb90e0ac4da/ply-3.11.tar.gz",
+            "externalRefs": [
+                {
+                    "referenceCategory": "PACKAGE_MANAGER",
+                    "referenceLocator": "pkg:pypi/ply@3.11",
+                    "referenceType": "purl"
+                }
+            ],
+            "filesAnalyzed": false,
+            "licenseConcluded": "BSD-3-Clause",
+            "licenseDeclared": "BSD-3-Clause",
+            "name": "ply",
+            "supplier": "Organization: https://pypi.org",
+            "versionInfo": "3.11"
+        },
+        {
+            "SPDXID": "SPDXRef-pyparsing",
+            "checksums": [
+                {
+                    "algorithm": "SHA256",
+                    "checksumValue": "c777f4d763f140633dcb6d8a3eda953bf7a214dc4eff598413c070bcdc117cbc"
+                },
+                {
+                    "algorithm": "MD5",
+                    "checksumValue": "ca3bea68cd1a84584b68cd7bed679464"
+                }
+            ],
+            "copyrightText": "Copyright 2004, Paul McGuire\nCopyright 2006, Paul McGuire\nCopyright 2008 Chris Lambrou\nCopyright 2008, Paul McGuire\nCopyright 2010, Paul McGuire\nCopyright 2011, Paul McGuire\nCopyright 2015, Paul McGuire\nCopyright 2016, Paul McGuire\nCopyright 2018, Paul McGuire\nCopyright 2019, Paul McGuire\nCopyright 2020, Paul McGuire\nCopyright 2021, Paul McGuire\nCopyright 2023, Paul McGuire\nCopyright 2024, Paul McGuire\nCopyright Paul McGuire, 2019\nCopyright Paul McGuire, 2021\ncopyright 2006, Paul McGuire\nCopyright, 2010, Paul McGuire\nCopyright, 2007 - Paul McGuire\nCopyright, 2012 - Paul McGuire\nCopyright 2006, by Paul McGuire\nCopyright 2008, by Paul McGuire\nCopyright 2012, Paul T. McGuire\nCopyright 2022, by Paul McGuire\nCopyright 2024, by Paul McGuire\nCopyright (c) 2003, Paul McGuire\nCopyright (c) 2004, Paul McGuire\nCopyright (c) 2006, Paul McGuire\nCopyright (c) 2016, Paul McGuire\nCopyright (c) 2024, Paul McGuire\nCopyright 2010,2019 Paul McGuire\nCopyright, 2006, by Paul McGuire\nCopyright 2002-2021, Paul McGuire\nCopyright 2005-2006, Paul McGuire\nCopyright 2009, 2011 Paul McGuire\nCopyright (c) 2018 Paul T. McGuire\nCopyright Ellis & Grant, Inc. 2005\nCopyright 2003-2019 by Paul McGuire\nCopyright 2011,2015 Paul T. McGuire\nCopyright (c) 2003,2019 Paul McGuire\nCopyright (c) 2003-2024 Paul McGuire\nCopyright (c) 2003-2025 Paul McGuire\nCopyright (c) 2006,2016 Paul McGuire\nCopyright 2003, 2019 by Paul McGuire\nCopyright 2004-2016, by Paul McGuire\nCopyright 2007, 2023 by Paul McGuire\nCopyright 2007-2011, by Paul McGuire\nCopyright 2010, 2019 by Paul McGuire\nCopyright 2012, 2019 Paul T. McGuire\ncopyright 2018-2024, Paul T. McGuire\nCopyright (c) 2003,2016, Paul McGuire\nCopyright (c) 2004, 2006 Paul McGuire\nCopyright (c) 2004-2016, Paul McGuire\nCopyright (c) 2006, 2019, Paul McGuire\nCopyright (c) 2003-2022 Paul T. McGuire\nCopyright (c) 2004-2011 Paul T. McGuire\nCopyright (c) 2006, 2016, 2023, Paul McGuire\nCopyright (c) 2006, Estrate, the Netherlands\nCopyright 1989 by Carnegie Mellon University\nCopyright 2004-2010, by Paul McGuire September, 2010\nCopyright Petri Savolainen <firstname.lastname@iki.fi>\nCopyright 2004, by Alberto Santini http://www.albertosantini.it/chess\n",
+            "downloadLocation": "https://files.pythonhosted.org/packages/f3/91/9c6ee907786a473bf81c5f53cf703ba0957b23ab84c264080fb5a450416f/pyparsing-3.3.2.tar.gz",
+            "externalRefs": [
+                {
+                    "referenceCategory": "PACKAGE_MANAGER",
+                    "referenceLocator": "pkg:pypi/pyparsing@3.3.2",
+                    "referenceType": "purl"
+                }
+            ],
+            "filesAnalyzed": false,
+            "licenseConcluded": "MIT",
+            "licenseDeclared": "MIT",
+            "name": "pyparsing",
+            "supplier": "Organization: https://pypi.org",
+            "versionInfo": "3.3.2"
+        },
+        {
+            "SPDXID": "SPDXRef-pyyaml",
+            "checksums": [
+                {
+                    "algorithm": "SHA256",
+                    "checksumValue": "d76623373421df22fb4cf8817020cbb7ef15c725b9d5e45f17e189bfc384190f"
+                },
+                {
+                    "algorithm": "MD5",
+                    "checksumValue": "dbc6f815cd75160ccf12e470be1c8d6e"
+                }
+            ],
+            "copyrightText": "Copyright (c) 2017-2021 Ingy\nCopyright (c) 2006-2016 Kirill Simonov\n",
+            "downloadLocation": "https://files.pythonhosted.org/packages/05/8e/961c0007c59b8dd7729d542c61a4d537767a59645b82a0b521206e1e25c2/pyyaml-6.0.3.tar.gz",
+            "externalRefs": [
+                {
+                    "referenceCategory": "PACKAGE_MANAGER",
+                    "referenceLocator": "pkg:pypi/pyyaml@6.0.3",
+                    "referenceType": "purl"
+                }
+            ],
+            "filesAnalyzed": false,
+            "licenseConcluded": "MIT",
+            "licenseDeclared": "MIT",
+            "name": "pyyaml",
+            "supplier": "Organization: https://pypi.org",
+            "versionInfo": "6.0.3"
+        },
+        {
+            "SPDXID": "SPDXRef-rdflib",
+            "checksums": [
+                {
+                    "algorithm": "SHA256",
+                    "checksumValue": "6c831288d5e4a5a7ece85d0ccde9877d512a3d0f02d7c06455d00d6d0ea379df"
+                },
+                {
+                    "algorithm": "MD5",
+                    "checksumValue": "11bd8e278d1c1e5628ace31a7db904a4"
+                }
+            ],
+            "copyrightText": "NOASSERTION",
+            "downloadLocation": "https://files.pythonhosted.org/packages/98/f5/18bb77b7af9526add0c727a3b2048959847dc5fb030913e2918bf384fec3/rdflib-7.6.0.tar.gz",
+            "externalRefs": [
+                {
+                    "referenceCategory": "PACKAGE_MANAGER",
+                    "referenceLocator": "pkg:pypi/rdflib@7.6.0",
+                    "referenceType": "purl"
+                }
+            ],
+            "filesAnalyzed": false,
+            "licenseConcluded": "BSD-3-Clause",
+            "licenseDeclared": "BSD-3-Clause",
+            "name": "rdflib",
+            "supplier": "Organization: https://pypi.org",
+            "versionInfo": "7.6.0"
+        },
+        {
+            "SPDXID": "SPDXRef-requests",
+            "checksums": [
+                {
+                    "algorithm": "SHA256",
+                    "checksumValue": "18817f8c57c6263968bc123d237e3b8b08ac046f5456bd1e307ee8f4250d3517"
+                },
+                {
+                    "algorithm": "MD5",
+                    "checksumValue": "ebc3b42b51c6245524345d170e5d4c50"
+                }
+            ],
+            "copyrightText": "Copyright Kenneth Reitz\nCopyright 2019 Kenneth Reitz\ncopyright (c) 2012 by Kenneth Reitz\ncopyright (c) 2017 by Kenneth Reitz\n",
+            "downloadLocation": "https://files.pythonhosted.org/packages/5f/a4/98b9c7c6428a668bf7e42ebb7c79d576a1c3c1e3ae2d47e674b468388871/requests-2.33.1.tar.gz",
+            "externalRefs": [
+                {
+                    "referenceCategory": "PACKAGE_MANAGER",
+                    "referenceLocator": "pkg:pypi/requests@2.33.1",
+                    "referenceType": "purl"
+                }
+            ],
+            "filesAnalyzed": false,
+            "licenseConcluded": "Apache-2.0",
+            "licenseDeclared": "Apache-2.0",
+            "name": "requests",
+            "supplier": "Organization: https://pypi.org",
+            "versionInfo": "2.33.1"
+        },
+        {
+            "SPDXID": "SPDXRef-semantic-version",
+            "checksums": [
+                {
+                    "algorithm": "SHA256",
+                    "checksumValue": "bdabb6d336998cbb378d4b9db3a4b56a1e3235701dc05ea2690d9a997ed5041c"
+                },
+                {
+                    "algorithm": "MD5",
+                    "checksumValue": "e48abef93ba69abcd4eaf4640edfc38b"
+                }
+            ],
+            "copyrightText": "Copyright (c) The python-semanticversion project\ncopyright u'2012-2019, The python-semanticversion project\n",
+            "downloadLocation": "https://files.pythonhosted.org/packages/7d/31/f2289ce78b9b473d582568c234e104d2a342fd658cc288a7553d83bb8595/semantic_version-2.10.0.tar.gz",
+            "externalRefs": [
+                {
+                    "referenceCategory": "PACKAGE_MANAGER",
+                    "referenceLocator": "pkg:pypi/semantic-version@2.10.0",
+                    "referenceType": "purl"
+                }
+            ],
+            "filesAnalyzed": false,
+            "licenseConcluded": "BSD-2-Clause",
+            "licenseDeclared": "BSD-2-Clause",
+            "name": "semantic-version",
+            "supplier": "Organization: https://pypi.org",
+            "versionInfo": "2.10.0"
+        },
+        {
+            "SPDXID": "SPDXRef-spdx-license-list",
+            "checksums": [
+                {
+                    "algorithm": "SHA256",
+                    "checksumValue": "7b7c163d4a92a5f044281692784d287b12ca36d2e9caf6e39f40b1a1e1003fce"
+                },
+                {
+                    "algorithm": "MD5",
+                    "checksumValue": "acdc6a3c0431a87f26685ec007945865"
+                }
+            ],
+            "copyrightText": "Copyright (c) 2022 JJMC89\n",
+            "downloadLocation": "https://files.pythonhosted.org/packages/df/a7/a8c001c3e904c1fda2d7b0a0e25db8a17a3b4612a90e1c8c9fd62c417c97/spdx_license_list-3.28.0.tar.gz",
+            "externalRefs": [
+                {
+                    "referenceCategory": "PACKAGE_MANAGER",
+                    "referenceLocator": "pkg:pypi/spdx-license-list@3.28.0",
+                    "referenceType": "purl"
+                }
+            ],
+            "filesAnalyzed": false,
+            "licenseConcluded": "MIT",
+            "licenseDeclared": "MIT",
+            "name": "spdx-license-list",
+            "supplier": "Organization: https://pypi.org",
+            "versionInfo": "3.28.0"
+        },
+        {
+            "SPDXID": "SPDXRef-spdx-tools",
+            "checksums": [
+                {
+                    "algorithm": "SHA256",
+                    "checksumValue": "be600beb2f762f0116025e05490d399e724f668bef84025a7c421bb266688bdb"
+                },
+                {
+                    "algorithm": "MD5",
+                    "checksumValue": "1f57f1eb5bdbc42d3de855d3f2701dfe"
+                }
+            ],
+            "copyrightText": "NOASSERTION",
+            "downloadLocation": "https://files.pythonhosted.org/packages/2f/99/33383f587b59cbd191cc1c0fd5408e550b9275e0090d32561cbddc973fdc/spdx_tools-0.8.5.tar.gz",
+            "externalRefs": [
+                {
+                    "referenceCategory": "PACKAGE_MANAGER",
+                    "referenceLocator": "pkg:pypi/spdx-tools@0.8.5",
+                    "referenceType": "purl"
+                }
+            ],
+            "filesAnalyzed": false,
+            "licenseConcluded": "Apache-2.0",
+            "licenseDeclared": "Apache-2.0",
+            "name": "spdx-tools",
+            "supplier": "Organization: https://pypi.org",
+            "versionInfo": "0.8.5"
+        },
+        {
+            "SPDXID": "SPDXRef-uritools",
+            "checksums": [
+                {
+                    "algorithm": "SHA256",
+                    "checksumValue": "be97e452528e7a42ef0a4df68364ddd77833e982c5bac5cdcfee15c81f65e96b"
+                },
+                {
+                    "algorithm": "MD5",
+                    "checksumValue": "26240a574ea4c6f9f3b038dec724120a"
+                }
+            ],
+            "copyrightText": "NOASSERTION",
+            "downloadLocation": "https://files.pythonhosted.org/packages/8a/97/508fa009ddc9c0d0e6e687eca0e3aa6ff09ac9836f98c28958a7eed936c1/uritools-6.1.0.tar.gz",
+            "externalRefs": [
+                {
+                    "referenceCategory": "PACKAGE_MANAGER",
+                    "referenceLocator": "pkg:pypi/uritools@6.1.0",
+                    "referenceType": "purl"
+                }
+            ],
+            "filesAnalyzed": false,
+            "licenseConcluded": "MIT",
+            "licenseDeclared": "MIT",
+            "name": "uritools",
+            "supplier": "Organization: https://pypi.org",
+            "versionInfo": "6.1.0"
+        },
+        {
+            "SPDXID": "SPDXRef-urllib3",
+            "checksums": [
+                {
+                    "algorithm": "SHA256",
+                    "checksumValue": "1b62b6884944a57dbe321509ab94fd4d3b307075e0c2eae991ac71ee15ad38ed"
+                },
+                {
+                    "algorithm": "MD5",
+                    "checksumValue": "2c381874816fe551f50a2551abae62b3"
+                }
+            ],
+            "copyrightText": "Copyright 2019-2022, Pyodide contributors\n2019-2022 Pyodide contributors and Mozilla\nCopyright (c) 2019-2022, Pyodide contributors\nCopyright (c) 2008-2020 Andrey Petrov and contributors\n",
+            "downloadLocation": "https://files.pythonhosted.org/packages/c7/24/5f1b3bdffd70275f6661c76461e25f024d5a38a46f04aaca912426a2b1d3/urllib3-2.6.3.tar.gz",
+            "externalRefs": [
+                {
+                    "referenceCategory": "PACKAGE_MANAGER",
+                    "referenceLocator": "pkg:pypi/urllib3@2.6.3",
+                    "referenceType": "purl"
+                }
+            ],
+            "filesAnalyzed": false,
+            "licenseConcluded": "MIT",
+            "licenseDeclared": "MIT",
+            "name": "urllib3",
+            "supplier": "Organization: https://pypi.org",
+            "versionInfo": "2.6.3"
+        },
+        {
+            "SPDXID": "SPDXRef-xmltodict",
+            "checksums": [
+                {
+                    "algorithm": "SHA256",
+                    "checksumValue": "6d94c9f834dd9e44514162799d344d815a3a4faec913717a9ecbfa5be1bb8e61"
+                },
+                {
+                    "algorithm": "MD5",
+                    "checksumValue": "f0a83032fc31c918a8cd9e60cdb46cb1"
+                }
+            ],
+            "copyrightText": "Copyright (c) 2012 Martin Blech and individual contributors\n",
+            "downloadLocation": "https://files.pythonhosted.org/packages/19/70/80f3b7c10d2630aa66414bf23d210386700aa390547278c789afa994fd7e/xmltodict-1.0.4.tar.gz",
+            "externalRefs": [
+                {
+                    "referenceCategory": "PACKAGE_MANAGER",
+                    "referenceLocator": "pkg:pypi/xmltodict@1.0.4",
+                    "referenceType": "purl"
+                }
+            ],
+            "filesAnalyzed": false,
+            "licenseConcluded": "MIT",
+            "licenseDeclared": "MIT",
+            "name": "xmltodict",
+            "supplier": "Organization: https://pypi.org",
+            "versionInfo": "1.0.4"
+        }
+    ],
+    "relationships": [
+        {
+            "spdxElementId": "SPDXRef-DOCUMENT",
+            "relatedSpdxElement": "SPDXRef-pypispdx",
+            "relationshipType": "DESCRIBES"
+        },
+        {
+            "spdxElementId": "SPDXRef-pypispdx",
+            "relatedSpdxElement": "SPDXRef-beartype",
+            "relationshipType": "CONTAINS"
+        },
+        {
+            "spdxElementId": "SPDXRef-pypispdx",
+            "relatedSpdxElement": "SPDXRef-boolean-py",
+            "relationshipType": "CONTAINS"
+        },
+        {
+            "spdxElementId": "SPDXRef-pypispdx",
+            "relatedSpdxElement": "SPDXRef-certifi",
+            "relationshipType": "CONTAINS"
+        },
+        {
+            "spdxElementId": "SPDXRef-pypispdx",
+            "relatedSpdxElement": "SPDXRef-charset-normalizer",
+            "relationshipType": "CONTAINS"
+        },
+        {
+            "spdxElementId": "SPDXRef-pypispdx",
+            "relatedSpdxElement": "SPDXRef-click",
+            "relationshipType": "CONTAINS"
+        },
+        {
+            "spdxElementId": "SPDXRef-pypispdx",
+            "relatedSpdxElement": "SPDXRef-idna",
+            "relationshipType": "CONTAINS"
+        },
+        {
+            "spdxElementId": "SPDXRef-pypispdx",
+            "relatedSpdxElement": "SPDXRef-license-expression",
+            "relationshipType": "CONTAINS"
+        },
+        {
+            "spdxElementId": "SPDXRef-pypispdx",
+            "relatedSpdxElement": "SPDXRef-ply",
+            "relationshipType": "CONTAINS"
+        },
+        {
+            "spdxElementId": "SPDXRef-pypispdx",
+            "relatedSpdxElement": "SPDXRef-pyparsing",
+            "relationshipType": "CONTAINS"
+        },
+        {
+            "spdxElementId": "SPDXRef-pypispdx",
+            "relatedSpdxElement": "SPDXRef-pyyaml",
+            "relationshipType": "CONTAINS"
+        },
+        {
+            "spdxElementId": "SPDXRef-pypispdx",
+            "relatedSpdxElement": "SPDXRef-rdflib",
+            "relationshipType": "CONTAINS"
+        },
+        {
+            "spdxElementId": "SPDXRef-pypispdx",
+            "relatedSpdxElement": "SPDXRef-requests",
+            "relationshipType": "CONTAINS"
+        },
+        {
+            "spdxElementId": "SPDXRef-pypispdx",
+            "relatedSpdxElement": "SPDXRef-semantic-version",
+            "relationshipType": "CONTAINS"
+        },
+        {
+            "spdxElementId": "SPDXRef-pypispdx",
+            "relatedSpdxElement": "SPDXRef-spdx-license-list",
+            "relationshipType": "CONTAINS"
+        },
+        {
+            "spdxElementId": "SPDXRef-pypispdx",
+            "relatedSpdxElement": "SPDXRef-spdx-tools",
+            "relationshipType": "CONTAINS"
+        },
+        {
+            "spdxElementId": "SPDXRef-pypispdx",
+            "relatedSpdxElement": "SPDXRef-uritools",
+            "relationshipType": "CONTAINS"
+        },
+        {
+            "spdxElementId": "SPDXRef-pypispdx",
+            "relatedSpdxElement": "SPDXRef-urllib3",
+            "relationshipType": "CONTAINS"
+        },
+        {
+            "spdxElementId": "SPDXRef-pypispdx",
+            "relatedSpdxElement": "SPDXRef-xmltodict",
+            "relationshipType": "CONTAINS"
+        }
+    ]
+}
