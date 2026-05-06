@@ -30,7 +30,7 @@ from spdx_tools.spdx.writer.write_anything import write_file
 SPDX_VERSION = "SPDX-2.3"
 DATA_LICENSE = "CC0-1.0"
 SPDX_DOCUMENT_REF = "SPDXRef-DOCUMENT"
-VERSION = "0.3.0"
+VERSION = "0.3.1"
 CREATOR_TOOL = f"pypispdx - {VERSION}"
 LICENSE_LIST_VERSION = "3.28"
 CISA_SBOM_TYPE = "Analyzed"
@@ -345,10 +345,10 @@ def print_spdx3_header(package_name: str, package_version: str, sbom_file_object
 
     organization = os.getenv("ORGANIZATION", "UNKNOWN")
     sbom_file_object.write('            "createdBy": [\n')
-    sbom_file_object.write(f'                "https://spdx.org/spdxdocs/SPDXRef-{organization}"\n')
+    sbom_file_object.write(f'                "https://spdx.org/spdxdocs/{organization}"\n')
     sbom_file_object.write('            ],\n')
     sbom_file_object.write('            "createdUsing": [\n')
-    sbom_file_object.write('                "https://pypi.org/spdxdocs/SPDXRef-pypispdx"\n')
+    sbom_file_object.write('                "https://pypi.org/spdxdocs/pypispdx"\n')
     sbom_file_object.write('            ],\n')
 
     # Use datetime.UTC if available (Python 3.11+), otherwise use datetime.timezone.utc
@@ -363,7 +363,7 @@ def print_spdx3_header(package_name: str, package_version: str, sbom_file_object
     sbom_file_object.write('            "spdxId": "https://spdx.org/spdxdocs/spdxdocument",\n')
     sbom_file_object.write('            "type": "SpdxDocument",\n')
     sbom_file_object.write('            "name": "spdxdocument",\n')
-    sbom_file_object.write('            "dataLicense": "https://spdx.org/spdxdocs/SPDXRef-CC0-1.0",\n')
+    sbom_file_object.write('            "dataLicense": "https://spdx.org/spdxdocs/CC0-1.0",\n')
     sbom_file_object.write('            "rootElement": [\n')
     sbom_file_object.write('                "https://spdx.org/spdxdocs/software_Sbom"\n')
     sbom_file_object.write('            ],\n')
@@ -380,7 +380,7 @@ def print_spdx3_header(package_name: str, package_version: str, sbom_file_object
     sbom_file_object.write('            "type": "software_Sbom",\n')
     sbom_file_object.write(f'            "name": "{dashed_package_name}-{package_version}",\n')
     sbom_file_object.write('            "rootElement": [\n')
-    sbom_file_object.write(f'                "https://spdx.org/spdxdocs/SPDXRef-{dashed_package_name}"\n')
+    sbom_file_object.write(f'                "https://spdx.org/spdxdocs/{dashed_package_name}"\n')
     sbom_file_object.write('            ],\n')
     sbom_file_object.write('            "software_sbomType": [\n')
     sbom_file_object.write(f'                "{CISA_SBOM_TYPE.lower()}"\n')
@@ -389,21 +389,21 @@ def print_spdx3_header(package_name: str, package_version: str, sbom_file_object
     sbom_file_object.write('        },\n')
 
     sbom_file_object.write('        {\n')
-    sbom_file_object.write('            "spdxId": "https://pypi.org/spdxdocs/SPDXRef-pypispdx",\n')
+    sbom_file_object.write('            "spdxId": "https://pypi.org/spdxdocs/pypispdx",\n')
     sbom_file_object.write('            "type": "Tool",\n')
     sbom_file_object.write(f'            "name": "{CREATOR_TOOL}",\n')
     sbom_file_object.write('            "creationInfo": "_:creationInfo"\n')
     sbom_file_object.write('        },\n')
 
     sbom_file_object.write('        {\n')
-    sbom_file_object.write(f'            "spdxId": "https://spdx.org/spdxdocs/SPDXRef-{organization}",\n')
+    sbom_file_object.write(f'            "spdxId": "https://spdx.org/spdxdocs/{organization}",\n')
     sbom_file_object.write('            "type": "Organization",\n')
     sbom_file_object.write(f'            "name": "{organization}",\n')
     sbom_file_object.write('            "creationInfo": "_:creationInfo"\n')
     sbom_file_object.write('        },\n')
 
     sbom_file_object.write('        {\n')
-    sbom_file_object.write('            "spdxId": "https://spdx.org/spdxdocs/SPDXRef-pypi",\n')
+    sbom_file_object.write('            "spdxId": "https://spdx.org/spdxdocs/pypi",\n')
     sbom_file_object.write('            "type": "Organization",\n')
     sbom_file_object.write('            "name": "pypi.org",\n')
     sbom_file_object.write('            "creationInfo": "_:creationInfo"\n')
@@ -479,11 +479,11 @@ def print_package(package_name: str, package_version: str, sbom_file_object,
         sbom_file_object.write(f"PackageSupplier: {PACKAGE_SUPPLIER}\n")
     else:
         sbom_file_object.write('        {\n')
-        sbom_file_object.write(f'            "spdxId": "https://spdx.org/spdxdocs/SPDXRef-{dashed_package_name}",\n')
+        sbom_file_object.write(f'            "spdxId": "https://spdx.org/spdxdocs/{dashed_package_name}",\n')
         sbom_file_object.write('            "type": "software_Package",\n')
         sbom_file_object.write(f'            "name": "{dashed_package_name}",\n')
         sbom_file_object.write(f'            "software_packageVersion": "{package_version}",\n')
-        sbom_file_object.write('            "suppliedBy": "https://spdx.org/spdxdocs/SPDXRef-pypi",\n')
+        sbom_file_object.write('            "suppliedBy": "https://spdx.org/spdxdocs/pypi",\n')
         sbom_file_object.write(f'            "software_packageUrl": "pkg:pypi/{dashed_package_name}@{package_version}",\n')
 
     download_location = "NOASSERTION"
@@ -659,7 +659,7 @@ def print_package(package_name: str, package_version: str, sbom_file_object,
 
     if spdx3:
         sbom_file_object.write('        {\n')
-        sbom_file_object.write(f'            "spdxId": "https://spdx.org/spdxdocs/SPDXRef-LicenseExpression-{dashed_package_name}",\n')
+        sbom_file_object.write(f'            "spdxId": "https://spdx.org/spdxdocs/LicenseExpression-{dashed_package_name}",\n')
         sbom_file_object.write('            "type": "simplelicensing_LicenseExpression",\n')
         sbom_file_object.write(f'            "simplelicensing_licenseExpression": "{spdx_license}",\n')
         sbom_file_object.write(f'            "simplelicensing_licenseListVersion": "{LICENSE_LIST_VERSION}.0",\n')
@@ -674,9 +674,9 @@ def print_package(package_name: str, package_version: str, sbom_file_object,
         sbom_file_object.write(f'            "spdxId": "https://spdx.org/spdxdocs/relationshipconcluded-{dashed_package_name}",\n')
         sbom_file_object.write('            "type": "Relationship",\n')
         sbom_file_object.write('            "relationshipType": "hasConcludedLicense",\n')
-        sbom_file_object.write(f'            "from": "https://spdx.org/spdxdocs/SPDXRef-{dashed_package_name}",\n')
+        sbom_file_object.write(f'            "from": "https://spdx.org/spdxdocs/{dashed_package_name}",\n')
         sbom_file_object.write('            "to": [\n')
-        sbom_file_object.write(f'                "https://spdx.org/spdxdocs/SPDXRef-LicenseExpression-{dashed_package_name}"\n')
+        sbom_file_object.write(f'                "https://spdx.org/spdxdocs/LicenseExpression-{dashed_package_name}"\n')
         sbom_file_object.write('            ],\n')
         sbom_file_object.write('            "creationInfo": "_:creationInfo"\n')
         sbom_file_object.write('        },\n')
@@ -684,9 +684,9 @@ def print_package(package_name: str, package_version: str, sbom_file_object,
         sbom_file_object.write(f'            "spdxId": "https://spdx.org/spdxdocs/relationshipdeclared-{dashed_package_name}",\n')
         sbom_file_object.write('            "type": "Relationship",\n')
         sbom_file_object.write('            "relationshipType": "hasDeclaredLicense",\n')
-        sbom_file_object.write(f'            "from": "https://spdx.org/spdxdocs/SPDXRef-{dashed_package_name}",\n')
+        sbom_file_object.write(f'            "from": "https://spdx.org/spdxdocs/{dashed_package_name}",\n')
         sbom_file_object.write('            "to": [\n')
-        sbom_file_object.write(f'                "https://spdx.org/spdxdocs/SPDXRef-LicenseExpression-{dashed_package_name}"\n')
+        sbom_file_object.write(f'                "https://spdx.org/spdxdocs/LicenseExpression-{dashed_package_name}"\n')
         sbom_file_object.write('            ],\n')
         sbom_file_object.write('            "creationInfo": "_:creationInfo"\n')
         sbom_file_object.write('        },\n')
@@ -854,7 +854,17 @@ def main():
         print("DEBUG: Debug mode is enabled.", file=sys.stderr)
 
     if not spdx3:
-        print(f"Creating SPDX 2.3 SBOM for PyPI package {main_package_name}")
+        if args.json:
+            spdxformat = "JSON"
+        elif args.rdf:
+            spdxformat = "RDF"
+        elif args.xml:
+            spdxformat = "XML"
+        elif args.yaml:
+            spdxformat = "YAML"
+        else:
+            spdxformat = "tag:value"
+        print(f"Creating SPDX 2.3 {spdxformat} SBOM for PyPI package {main_package_name}")
     else:
         print(f"Creating SPDX 3.0.1 SBOM for PyPI package {main_package_name}")
 
@@ -934,7 +944,7 @@ def main():
                 sbom.write(f"Relationship: {SPDX_DOCUMENT_REF} DESCRIBES SPDXRef-{main_package_dashed}\n")
             else:
                 sbom.write('        {\n')
-                sbom.write('            "spdxId": "https://spdx.org/spdxdocs/SPDXRef-CC0-1.0",\n')
+                sbom.write('            "spdxId": "https://spdx.org/spdxdocs/CC0-1.0",\n')
                 sbom.write('            "type": "simplelicensing_LicenseExpression",\n')
                 sbom.write('            "simplelicensing_licenseExpression": "CC0-1.0",\n')
                 sbom.write('            "creationInfo": "_:creationInfo"\n')
@@ -946,7 +956,7 @@ def main():
                 sbom.write('            "relationshipType": "describes",\n')
                 sbom.write('            "from": "https://spdx.org/spdxdocs/spdxdocument",\n')
                 sbom.write('            "to": [\n')
-                sbom.write(f'                "https://spdx.org/spdxdocs/SPDXRef-{main_package_dashed}"\n')
+                sbom.write(f'                "https://spdx.org/spdxdocs/{main_package_dashed}"\n')
                 sbom.write('            ],\n')
                 sbom.write('            "creationInfo": "_:creationInfo"\n')
                 if len(dependencies) == 1: # Only main package
@@ -969,9 +979,9 @@ def main():
                         sbom.write(f'            "spdxId": "https://pypi.org/contains-{dep_name_dashed}",\n')
                         sbom.write('            "type": "Relationship",\n')
                         sbom.write('            "relationshipType": "contains",\n')
-                        sbom.write(f'            "from": "https://spdx.org/spdxdocs/SPDXRef-{main_package_dashed}",\n')
+                        sbom.write(f'            "from": "https://spdx.org/spdxdocs/{main_package_dashed}",\n')
                         sbom.write('            "to": [\n')
-                        sbom.write(f'                "https://spdx.org/spdxdocs/SPDXRef-{dep_name_dashed}"\n')
+                        sbom.write(f'                "https://spdx.org/spdxdocs/{dep_name_dashed}"\n')
                         sbom.write('            ],\n')
                         sbom.write('            "creationInfo": "_:creationInfo"\n')
                         sbom.write('        }')
