@@ -155,6 +155,12 @@ The SBOM cannot be created as ```google-ads-reports``` cannot currently be insta
 
 # History
 
+What is new in version 0.3.1
+
+* Simpler URIs (remove "SPDXRef-")
+* In SPDX 2.3, the create message includes the format
+* Update README to indicate that network access is needed when running the tool
+
 What is new in version 0.3.0
 
 * Add an option to create the SBOM in SPDX 3.0.1
