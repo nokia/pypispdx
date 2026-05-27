@@ -31,9 +31,12 @@ and <https://clearlydefined.io>.
 By default, the SPDX 2.3 output will be in tag:value format. The other formats, JSON, RDF,
 XML and YAML are available by using the corresponding command-line option.
 
-The SBOM filename will be ```package-version.spdx``` (plus the corresponding
+In SPDX 2.3, the SBOM filename will be ```package-version.spdx``` (plus the corresponding
 suffix for the other formats), where the package name will be in lower case,
 with underscores and dots replaced by dash.
+
+In SPDX 3.0, it will be ```package-version.spdx3.json``` as
+[recommended](https://github.com/spdx/spdx-spec/blob/develop/docs/serializations.md).
 
 Running again the command will give a different result if a newer version of the package or its
 transitive dependencies are available.
@@ -62,8 +65,9 @@ If not, it will be ```NOASSERTION```. See more details below.
 The ```PackageCopyrightText``` will taken from <https://clearlydefined.io> if it is
 present there. If not, it will be ```NOASSERTION```.
 
-The [PURL](https://github.com/package-url/purl-spec/) (Package URL) will be provided
-in the ```ExternalRef``` field.
+The [PURL](https://github.com/package-url/purl-spec/) (Package-URL) will be provided:
+* in the ```ExternalRef``` field in SPDX 2.3;
+* in the ```packageUrl``` property in SPDX 3.0.
 
 ## Licenses
 
