@@ -184,7 +184,9 @@ def is_valid_spdx_license_expression(spdx_license_expression: str) -> bool:
     """
 
     # Sanitize string
-    spdx_license_expression = re.sub(r'[^a-zA-Z0-9\-\._: ]', '', spdx_license_expression)
+    safe_spdx_license_expression = re.sub(r'[^a-zA-Z0-9\-\._: ]', '', spdx_license_expression)
+    if safe_spdx_license_expression != spdx_license_expression:
+        return False
 
     licensing = get_spdx_licensing()
     result = licensing.validate(spdx_license_expression)
